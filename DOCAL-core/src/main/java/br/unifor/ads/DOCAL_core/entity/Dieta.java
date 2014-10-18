@@ -1,10 +1,10 @@
-package entity;
+package br.unifor.ads.DOCAL_core.entity;
 
 import java.io.Serializable;
 
-public class Refeicao implements Serializable {
+public class Dieta implements Serializable {
 
-	private static final long serialVersionUID = -6520562816881021020L;
+	private static final long serialVersionUID = -3956463124025421223L;
 	
 	private Integer id;
 	private Usuario usuario_id;

@@ -1,4 +1,4 @@
-package entity;
+package br.unifor.ads.DOCAL_core.entity;
 
 import java.io.Serializable;
 
