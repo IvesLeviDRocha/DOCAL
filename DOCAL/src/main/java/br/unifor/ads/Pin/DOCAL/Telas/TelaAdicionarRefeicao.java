@@ -148,7 +148,7 @@ public class TelaAdicionarRefeicao extends JPanel {
 		
 		JLabel foto = new JLabel("");
 		foto.setHorizontalAlignment(SwingConstants.CENTER);
-		ImageIcon imagens = new ImageIcon(TelaAdicionarRefeicao.class.getResource("/br/unifor/ads/Pin/DietOC/Imagem/plano de fundo.png"));
+		ImageIcon imagens = new ImageIcon(TelaAdicionarRefeicao.class.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
 		Image imagem = imagens.getImage().getScaledInstance(540, 470, Image.SCALE_SMOOTH);
 		foto.setIcon(new ImageIcon(imagem));
 		foto.setBounds(0, 0, 540, 470);

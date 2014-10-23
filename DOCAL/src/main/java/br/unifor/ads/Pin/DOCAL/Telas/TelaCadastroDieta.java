@@ -51,7 +51,7 @@ public class TelaCadastroDieta extends JPanel {
 		lblCadastroDeDieta.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 22));
 		lblCadastroDeDieta.setBounds(165, 22, 199, 33);
 		add(lblCadastroDeDieta);
-		ImageIcon imagens = new ImageIcon(TelaAdicionarRefeicao.class.getResource("/br/unifor/ads/Pin/DietOC/Imagem/plano de fundo.png"));
+		ImageIcon imagens = new ImageIcon(TelaAdicionarRefeicao.class.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
 		Image imagem = imagens.getImage().getScaledInstance(540, 470, Image.SCALE_SMOOTH);
 		
 		JLabel lblNome = new JLabel("<html><B>Nome da dieta</B></html>",SwingConstants.CENTER);
