@@ -2,34 +2,26 @@ package br.unifor.ads.Pin.DOCAL.Telas;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
-
-import javafx.scene.control.TableColumn;
-
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Font;
-
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-
-import br.unifor.ads.Pin.DOCAL.Manager.ManagerHome;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JToolBar;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+import br.unifor.ads.Pin.DOCAL.Manager.ManagerHome;
 
 /**
  * Esta classe e responsavel por manter os componentes relativos a a pagina
