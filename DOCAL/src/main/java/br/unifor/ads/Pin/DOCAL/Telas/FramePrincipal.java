@@ -1,8 +1,15 @@
-package managers;
+package br.unifor.ads.Pin.DOCAL.Telas;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+
+import br.unifor.ads.Pin.DOCAL.Manager.ManagerAdicionarRefeicao;
+import br.unifor.ads.Pin.DOCAL.Manager.ManagerCadastroDieta;
+import br.unifor.ads.Pin.DOCAL.Manager.ManagerCadastroRefeicao;
+import br.unifor.ads.Pin.DOCAL.Manager.ManagerCadastroUsuario;
+import br.unifor.ads.Pin.DOCAL.Manager.ManagerHome;
+import br.unifor.ads.Pin.DOCAL.Manager.ManagerLogin;
 
 /**
  * Esta classe tem como responsabilidade mostrar as telas da aplicacao.

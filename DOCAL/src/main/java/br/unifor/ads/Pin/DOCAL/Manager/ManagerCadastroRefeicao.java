@@ -1,6 +1,7 @@
-package managers;
+package br.unifor.ads.Pin.DOCAL.Manager;
 
-import telas.TelaCadastroRefeicao;
+import br.unifor.ads.Pin.DOCAL.Telas.FramePrincipal;
+import br.unifor.ads.Pin.DOCAL.Telas.TelaCadastroRefeicao;
 
 /**
  * Esta classe tem por responsabilidade realizar a conexao
@@ -24,6 +25,7 @@ public class ManagerCadastroRefeicao extends Manager {
 	 */
 	public void btnCadastrarPressionado() {
 		getFrame().mostrarAdicionarRefeicao();
+		tela.limparFormularios();
 	}
 	
 	/**
@@ -31,6 +33,7 @@ public class ManagerCadastroRefeicao extends Manager {
 	 */
 	public void btnCancelarPressionado() {
 		getFrame().mostrarAdicionarRefeicao();
+		tela.limparFormularios();
 	}
 	
 	/**

@@ -1,6 +1,9 @@
-package managers;
+package br.unifor.ads.Pin.DOCAL.Manager;
 
-import telas.TelaAdicionarRefeicao;
+import javax.swing.JOptionPane;
+
+import br.unifor.ads.Pin.DOCAL.Telas.FramePrincipal;
+import br.unifor.ads.Pin.DOCAL.Telas.TelaAdicionarRefeicao;
 
 /**
  * Esta classe tem por responsabilidade realizar a conexao
@@ -51,7 +54,13 @@ public class ManagerAdicionarRefeicao extends Manager {
 		
 	}
 	
-
+	/**
+	 * Operacao relativa ao botao Remover.
+	 */
+	public void btnRemoverPressionado() {
+		JOptionPane.showConfirmDialog(getFrame(), "Deseja remover esta refeicao da lista?",
+				"Remover", JOptionPane.YES_NO_OPTION);
+	}
 
 	
 }

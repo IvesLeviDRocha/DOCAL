@@ -1,6 +1,7 @@
-package managers;
+package br.unifor.ads.Pin.DOCAL.Manager;
 
-import telas.TelaLogin;
+import br.unifor.ads.Pin.DOCAL.Telas.FramePrincipal;
+import br.unifor.ads.Pin.DOCAL.Telas.TelaLogin;
 
 /**
  * Esta classe tem por responsabilidade realizar a conexao
@@ -31,13 +32,19 @@ public class ManagerLogin extends Manager {
 	 */
 	public void btnEntrarPressionado() {
 		getFrame().mostrarHome();
+		tela.limparFormularios();
 	}
 	
 	/**
 	 * Operacao relativa ao botao Cadastrar.
 	 */
-	public void btnCadastrarPressionado() {
+	public void lblCadastrarPressionado() {
 		getFrame().mostrarCadastroUsuario();
+		tela.limparFormularios();
+	}
+	
+	public void btnSairPressionado() {
+		getFrame().setVisible(false);
 	}
 	
 }

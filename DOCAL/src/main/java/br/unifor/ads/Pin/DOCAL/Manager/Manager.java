@@ -1,4 +1,6 @@
-package managers;
+package br.unifor.ads.Pin.DOCAL.Manager;
+
+import br.unifor.ads.Pin.DOCAL.Telas.FramePrincipal;
 
 /**
  * Classe abstrata para manter codigo comum aos managers.

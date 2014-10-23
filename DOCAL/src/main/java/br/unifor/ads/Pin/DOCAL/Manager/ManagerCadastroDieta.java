@@ -1,6 +1,7 @@
-package managers;
+package br.unifor.ads.Pin.DOCAL.Manager;
 
-import telas.TelaCadastroDieta;
+import br.unifor.ads.Pin.DOCAL.Telas.FramePrincipal;
+import br.unifor.ads.Pin.DOCAL.Telas.TelaCadastroDieta;
 
 /**
  * Esta classe tem por responsabilidade realizar a conexao
@@ -32,6 +33,7 @@ public class ManagerCadastroDieta extends Manager {
 	 */
 	public void btnCadastrarPressionado() {
 		getFrame().mostrarHome();
+		tela.limparFormularios();
 	}
 
 	/**
@@ -39,6 +41,7 @@ public class ManagerCadastroDieta extends Manager {
 	 */
 	public void btnCancelarPressionado() {
 		getFrame().mostrarHome();
+		tela.limparFormularios();
 	}
 	
 	

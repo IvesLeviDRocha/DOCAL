@@ -1,6 +1,9 @@
-package managers;
+package br.unifor.ads.Pin.DOCAL.Manager;
 
-import telas.TelaCadastroUsuario;
+import javax.swing.JOptionPane;
+
+import br.unifor.ads.Pin.DOCAL.Telas.FramePrincipal;
+import br.unifor.ads.Pin.DOCAL.Telas.TelaCadastroUsuario;
 
 /**
  * Esta classe tem por responsabilidade realizar a conexao
@@ -32,6 +35,7 @@ public class ManagerCadastroUsuario extends Manager {
 	 */
 	public void btnCancelarPressionado() {
 		getFrame().mostrarLogin();
+		tela.limparFormularios();
 	}
 	
 	/**
@@ -39,7 +43,14 @@ public class ManagerCadastroUsuario extends Manager {
 	 */
 	public void btnCadastrarPressionado() {
 		getFrame().mostrarHome();
+		tela.limparFormularios();
 	}
-
+	
+	/**
+	 * Operacao relativa ao botao Limpar.
+	 */
+	public void btnLimparPressionado() {
+		tela.limparFormularios();
+	}
 	
 }
