@@ -1,75 +1,52 @@
 package br.unifor.ads.DOCAL_core.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
+import br.unifor.ads.DOCAL_core.dao.EntityManager;
 import br.unifor.ads.DOCAL_core.entity.Usuario;
 
-public class UsuarioDAO {
-	
-	public void insert(Usuario usuario) {
-		Connection connection = null;
-		try {
-			connection = ConnectionPool.getConnection();
-			String sql = "insert into usuario (login, nome, senha, altura, peso) "
-					+ "values (?, ?, ?, ?, ?)";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(1, usuario.getLogin());
-			statement.setString(2, usuario.getNome());
-			statement.setString(3, usuario.getSenha());
-			statement.setFloat(4, usuario.getAltura());
-			statement.setFloat(5, usuario.getPeso());
-			statement.execute();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Nao foi possivel inserir o usuario!");
-		} finally {
-			tryCloseConnection(connection);
-		}
-	}
 
-	private void tryCloseConnection(Connection connection) {
-		try {
-			if(connection != null && !connection.isClosed()) {
-				connection.close();
-			} 
-		}catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Nao foi possivel fechar a conexao?");
-		}
-	}
-	
-	public Usuario findByNome(String nome) {
-		Connection connection = null;
-		Usuario usuario = null;
-		try {
-			connection = ConnectionPool.getConnection();
-			String sql = "select id, login, nome, senha, altura, peso from usuario "
-					+ "where nome = ?";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(1, nome);
-			
-			ResultSet result = statement.executeQuery();
-			if(result.next()) {
+public class UsuarioDAO {
+
+	private EntityManager em = new EntityManager() {
+		@Override
+		public Object trataResultSet(ResultSet result) throws SQLException {
+			Usuario usuario = null;
+			if (result.next()) {
 				usuario = new Usuario();
 				usuario.setId(result.getInt("id"));
-				usuario.setLogin(result.getString("login"));
 				usuario.setNome(result.getString("nome"));
-				usuario.setSenha(result.getString("senha"));
-				usuario.setAltura(result.getFloat("altura"));
-				usuario.setPeso(result.getFloat("peso"));
 			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Nao foi possivel inserir o usuario!");
-		} finally {
-			tryCloseConnection(connection);
+			return usuario;
 		}
-		return usuario;
+	};
+
+	public void inserir(Usuario usuario) {
+
+		String sql = "insert into usuario (nome) values (?)";
+		em.execute(sql, usuario.getNome());
+
+	}
+
+	public Usuario buscarPorNome(String nome) {
+
+		String sql = "select id, nome from usuario where nome = ?";
+		return (Usuario) em.getSingleResult(sql, nome);
+
+	}
+
+	public List<Object> buscarTodos() {
+		String sql = "select id, nome from usuario";
+		return em.resultList(sql);
+
+	}
+
+	public void excluir(Usuario usuario) {
+
+		String sql = "delete from usuario where nome = ?";
+		em.execute(sql, usuario.getNome());
 	}
 
 }

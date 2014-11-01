@@ -1,47 +1,53 @@
 package br.unifor.ads.DOCAL_core.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
+import br.unifor.ads.DOCAL_core.dao.EntityManager;
 import br.unifor.ads.DOCAL_core.entity.Dieta;
+
+
+
 
 public class DietaDAO {
 
-	public void insert(Dieta dieta) {
-		Connection connection = null;
-		try {
-			connection = ConnectionPool.getConnection();
-			String sql = "insert into dieta "
-					+ "(usuario_id, nome, carboidratos, proteinas, gorduras, calorias) "
-					+ "values (?, ?, ?, ?, ?, ?)";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setInt(1, dieta.getUsuario_id().getId());
-			statement.setString(2, dieta.getNome());
-			statement.setFloat(3, dieta.getCarboidratos());
-			statement.setFloat(4, dieta.getProteinas());
-			statement.setFloat(5, dieta.getGorduras());
-			statement.setFloat(6, dieta.getCalorias());
-			statement.execute();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Nao foi possivel inserir o usuario!");
-		} finally {
-			tryCloseConnection(connection);
+	private EntityManager em = new EntityManager() {
+		@Override
+		public Object trataResultSet(ResultSet result) throws SQLException {
+			Dieta dieta = null;
+			if (result.next()) {
+				dieta = new Dieta();
+				dieta.setId(result.getInt("id"));
+				dieta.setNome(result.getString("nome"));
+			}
+			return dieta;
 		}
-	}
-	
-	private void tryCloseConnection(Connection connection) {
-		try {
-			if(connection != null && !connection.isClosed()) {
-				connection.close();
-			} 
-		}catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Nao foi possivel fechar a conexao?");
-		}
-	}
-	
+	};
 
+	public void inserir(Dieta dieta) {
+
+		String sql = "insert into dieta (nome) values (?)";
+		em.execute(sql, dieta.getNome());
+
+	}
+
+	public Dieta buscarPorNome(String nome) {
+
+		String sql = "select id, nome from dieta where nome = ?";
+		return (Dieta) em.getSingleResult(sql, nome);
+
+	}
+
+	public List<Object> buscarTodos() {
+		String sql = "select id, nome from dieta";
+		return em.resultList(sql);
+
+	}
+
+	public void excluir(Dieta dieta) {
+
+		String sql = "delete from dieta where nome = ?";
+		em.execute(sql, dieta.getNome());
+	}
 }
