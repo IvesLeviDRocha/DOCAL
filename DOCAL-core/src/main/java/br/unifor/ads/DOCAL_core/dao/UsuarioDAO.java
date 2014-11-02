@@ -31,7 +31,6 @@ public class UsuarioDAO {
 		String sql = "insert into usuario (nome, altura, peso, login, senha) values (?, ?, ?, ?, ?)";
 		em.execute(sql, usuario.getNome(), usuario.getAltura(),
 				usuario.getPeso(), usuario.getLogin(), usuario.getSenha());
-
 	}
 
 	public Usuario buscarPorNome(String nome) {
@@ -44,7 +43,6 @@ public class UsuarioDAO {
 	public List<Object> buscarTodos() {
 		String sql = "select id, nome, altura, peso, login, senha from usuario";
 		return em.resultList(sql);
-
 	}
 
 	public void excluir(Usuario usuario) {

@@ -27,7 +27,6 @@ public class DietaDAO {
 	};
 
 	public void inserir(Dieta dieta) {
-
 		String sql = "insert into dieta (nome, carboidratos, proteinas, gorduras, calorias) values (?, ?, ?, ?, ?)";
 		em.execute(sql, dieta.getNome(), dieta.getCarboidratos(),
 				dieta.getProteinas(), dieta.getGorduras(), dieta.getCalorias());
@@ -38,18 +37,17 @@ public class DietaDAO {
 
 		String sql = "select id, nome, carboidratos, proteinas, gorduras, calorias from dieta where nome = ?";
 		return (Dieta) em.getSingleResult(sql, nome);
-
 	}
 
 	public List<Object> buscarTodos() {
 		String sql = "select id, nome, carboidratos, proteinas, gorduras, calorias from dieta";
 		return em.resultList(sql);
-
 	}
 
 	public void excluir(Dieta dieta) {
 
 		String sql = "delete from dieta where id = ?";
 		em.execute(sql, dieta.getNome());
+
 	}
 }
