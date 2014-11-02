@@ -12,10 +12,8 @@ public abstract class EntityManager {
 	public void execute(String sql, Object... params) {
 		PreparedStatement pstm = null;
 		try {
-
 			pstm = logicaConexao(sql, params);
 			pstm.execute();
-
 		} catch (SQLException e) {
 			System.out
 					.println("Não foi possível inserir o pais, tente novamente!");
@@ -28,14 +26,11 @@ public abstract class EntityManager {
 		Object retorno = null;
 		PreparedStatement pstm = null;
 		try {
-
 			pstm = logicaConexao(sql, params);
 			ResultSet result = pstm.executeQuery();
-
 			while (result.next()) {
 				retorno = trataResultSet(result);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out
@@ -47,26 +42,21 @@ public abstract class EntityManager {
 	}
 
 	public List<Object> resultList(String sql, Object... params) {
-
 		List<Object> lista = new ArrayList<Object>();
 		PreparedStatement pstm = null;
 		ResultSet result = null;
 		try {
-
 			pstm = logicaConexao(sql, params);
 			result = pstm.executeQuery();
-
 			while (result.next()) {
 				lista.add(trataResultSet(result));
 			}
-
 		} catch (SQLException e) {
 			System.out
 					.println("Não foi possível inserir o pais, tente novamente!");
 		} finally {
 			close(pstm, result);
 		}
-
 		return lista;
 	}
 
@@ -74,17 +64,15 @@ public abstract class EntityManager {
 			throws SQLException {
 		Connection connection = ConnectionPool.getConnection();
 		PreparedStatement pstm = connection.prepareStatement(sql);
-
 		for (int i = 0; i < params.length; i++) {
 			pstm.setObject(i + 1, params[i]);
 		}
-
 		return pstm;
 	}
 
 	private void close(PreparedStatement pstm, ResultSet resultSet) {
-			this.close(resultSet);
-			this.close(pstm);
+		this.close(resultSet);
+		this.close(pstm);
 	}
 
 	private void close(PreparedStatement pstm) {
@@ -97,11 +85,12 @@ public abstract class EntityManager {
 			System.out.println("Não foi possível fechar a conexão");
 		} finally {
 			try {
-				if(pstm != null && !pstm.isClosed()){
+				if (pstm != null && !pstm.isClosed()) {
 					pstm.close();
 				}
 			} catch (SQLException e) {
-				System.out.println("Não foi possível fechar o preparedStatement");
+				System.out
+						.println("Não foi possível fechar o preparedStatement");
 			}
 		}
 	}
