@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Refeicao implements Serializable {
 
 	private static final long serialVersionUID = -6520562816881021020L;
-	
+
 	private Integer id;
 	private Usuario usuario_id;
 	private String nome;
