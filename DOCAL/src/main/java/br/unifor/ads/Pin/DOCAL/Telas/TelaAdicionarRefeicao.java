@@ -39,12 +39,6 @@ public class TelaAdicionarRefeicao extends JPanel {
 	private TableRowSorter sorter;
 	private DefaultTableModel model;
 
-	/**
-	 * Cria a tela.
-	 * 
-	 * @param o
-	 *            ManagerAdicionarRefeicao responsavel pela tela.
-	 */
 	public TelaAdicionarRefeicao(ManagerAdicionarRefeicao manager) {
 		setBackground(new Color(255, 255, 255));
 
@@ -159,30 +153,18 @@ public class TelaAdicionarRefeicao extends JPanel {
 
 	}
 
-	/**
-	 * Delega a operacao adequada do botao Adicionar ao manager.
-	 */
 	public void btnAdicionarPressionado() {
 		manager.btnAdicionarPressionado();
 	}
 
-	/**
-	 * Delega a operacao adequada do botao CadastrarNova ao manager.
-	 */
 	public void btnCadastrarNovaPressionado() {
 		manager.btnCadastrarNovaPressionado();
 	}
 
-	/**
-	 * Delega a operacao adequada do botao Cancelar ao manager.
-	 */
 	public void btnCancelarPressionado() {
 		manager.btnCancelarPressionado();
 	}
 
-	/**
-	 * Delega a operacao adequada do botao Remover ao manager.
-	 */
 	public void btnRemoverPressionado() {
 		manager.btnRemoverPressionado();
 	}

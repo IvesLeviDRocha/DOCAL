@@ -32,17 +32,13 @@ public class TelaLogin extends JPanel {
 	private JTextField textFieldUsuario;
 	private JPasswordField passwordFieldSenha;
 
-	/**
-	 * Cria a tela.
-	 * @param o ManagerLogin responsavel por gerenciar a tela.
-	 */
 	public TelaLogin(ManagerLogin manager) {
 		setBackground(java.awt.Color.WHITE);
 
 		// Designa o manager recebido como proprio.
 		this.manager = manager;
-		
-		//Setta tamanho, layout e borda.
+
+		// Setta tamanho, layout e borda.
 		setPreferredSize(new Dimension(486, 406));
 		setLayout(null);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,7 +53,8 @@ public class TelaLogin extends JPanel {
 		// text field de usuário
 		textFieldUsuario = new JTextField();
 		textFieldUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		textFieldUsuario.setFont(new Font("Microsoft Sans Serif", Font.PLAIN,16));
+		textFieldUsuario.setFont(new Font("Microsoft Sans Serif", Font.PLAIN,
+				16));
 		textFieldUsuario.setBounds(101, 125, 273, 35);
 		add(textFieldUsuario);
 		textFieldUsuario.setColumns(10);
@@ -72,7 +69,8 @@ public class TelaLogin extends JPanel {
 		// textfield de senha
 		passwordFieldSenha = new JPasswordField();
 		passwordFieldSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		passwordFieldSenha.setFont(new Font("Microsoft Sans Serif", Font.PLAIN,16));
+		passwordFieldSenha.setFont(new Font("Microsoft Sans Serif", Font.PLAIN,
+				16));
 		passwordFieldSenha.setBounds(101, 209, 273, 35);
 		add(passwordFieldSenha);
 
@@ -95,8 +93,9 @@ public class TelaLogin extends JPanel {
 		lblLogin.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 28));
 		lblLogin.setBounds(180, 11, 102, 64);
 		add(lblLogin);
-		
-		JLabel lblCadastreseAqui =  new JLabel("<html><B>Cadastre-se aqui!</B></html>");
+
+		JLabel lblCadastreseAqui = new JLabel(
+				"<html><B>Cadastre-se aqui!</B></html>");
 		lblCadastreseAqui.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -106,7 +105,7 @@ public class TelaLogin extends JPanel {
 		lblCadastreseAqui.setBounds(101, 256, 114, 14);
 		lblCadastreseAqui.setForeground(java.awt.Color.RED);
 		add(lblCadastreseAqui);
-		
+
 		JButton btnSair = new JButton("Sair");
 		btnSair.setBackground(java.awt.Color.LIGHT_GRAY);
 		btnSair.addActionListener(new ActionListener() {
@@ -117,37 +116,31 @@ public class TelaLogin extends JPanel {
 		btnSair.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 20));
 		btnSair.setBounds(260, 305, 114, 48);
 		add(btnSair);
-		
+
 		JLabel foto = new JLabel("");
 		foto.setHorizontalAlignment(SwingConstants.CENTER);
-		ImageIcon imagens = new ImageIcon(TelaAdicionarRefeicao.class.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
-		Image imagem = imagens.getImage().getScaledInstance(486, 406, Image.SCALE_SMOOTH);
+		ImageIcon imagens = new ImageIcon(
+				TelaAdicionarRefeicao.class
+						.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
+		Image imagem = imagens.getImage().getScaledInstance(486, 406,
+				Image.SCALE_SMOOTH);
 		foto.setIcon(new ImageIcon(imagem));
 		foto.setBounds(0, 0, 486, 406);
 		add(foto);
 	}
 
-	/**
-	 * Delega a operacao adequada do botao Entrar ao manager.
-	 */
 	public void btnEntrarPressionado() {
 		manager.btnEntrarPressionado();
 	}
-	
-	/**
-	 * Delega a operacao adequada do botao Cadastrar ao manager.
-	 */
+
 	public void lblCadastrarPressionado() {
 		manager.lblCadastrarPressionado();
 	}
-	
+
 	public void btnSairPressionado() {
 		manager.btnSairPressionado();
 	}
 
-	/**
-	 * Limpa texto dos formularios.
-	 */
 	public void limparFormularios() {
 		textFieldUsuario.setText("");
 		passwordFieldSenha.setText("");

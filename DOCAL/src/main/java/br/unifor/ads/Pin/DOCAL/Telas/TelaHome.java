@@ -25,35 +25,30 @@ import br.unifor.ads.Pin.DOCAL.Manager.ManagerHome;
 
 /**
  * Esta classe e responsavel por manter os componentes relativos a a pagina
- *  principal do usuario.
+ * principal do usuario.
  */
 public class TelaHome extends JPanel {
-	
+
 	private static final long serialVersionUID = 2857670324681532711L;
-	
+
 	private ManagerHome manager;
 	private JTable table;
-	
-	/**
-	 * Cria a tela.
-	 * @param o ManagerHome responsavel pela tela.
-	 */
+
 	public TelaHome(ManagerHome manager) {
 		setBackground(Color.WHITE);
-		
+
 		this.manager = manager;
-		
-		//Setta tamanho, layout e borda.
+
+		// Setta tamanho, layout e borda.
 		setPreferredSize(new Dimension(540, 470));
 		setLayout(null);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
-		
-		
-		JLabel lblDieta = new JLabel("Dieta: [Dieta]",SwingConstants.CENTER);
+
+		JLabel lblDieta = new JLabel("Dieta: [Dieta]", SwingConstants.CENTER);
 		lblDieta.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 24));
 		lblDieta.setBounds(206, 73, 138, 37);
 		add(lblDieta);
-		
+
 		JButton btnAddRefeicao = new JButton("Adicionar Refeição");
 		btnAddRefeicao.setBackground(Color.LIGHT_GRAY);
 		btnAddRefeicao.addActionListener(new ActionListener() {
@@ -61,10 +56,11 @@ public class TelaHome extends JPanel {
 				btnAddRefeicaoPressionado();
 			}
 		});
-		btnAddRefeicao.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		btnAddRefeicao
+				.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
 		btnAddRefeicao.setBounds(332, 339, 178, 32);
 		add(btnAddRefeicao);
-		
+
 		JButton btnReset = new JButton("Reset");
 		btnReset.setBackground(Color.LIGHT_GRAY);
 		btnReset.addActionListener(new ActionListener() {
@@ -75,7 +71,7 @@ public class TelaHome extends JPanel {
 		btnReset.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
 		btnReset.setBounds(192, 342, 103, 27);
 		add(btnReset);
-		
+
 		JButton btnNovaDieta = new JButton("Nova Dieta");
 		btnNovaDieta.setBackground(Color.LIGHT_GRAY);
 		btnNovaDieta.addActionListener(new ActionListener() {
@@ -86,29 +82,28 @@ public class TelaHome extends JPanel {
 		btnNovaDieta.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
 		btnNovaDieta.setBounds(31, 342, 127, 27);
 		add(btnNovaDieta);
-		
-		
-		
-		String colunas [] = {"","Hoje","Total"};
-		String dados [][] = {{"Caboidratos","Valor","Valor"},{"Proteinas","Valor","Valor"},
-							 {"Gorduras","Valor","Valor"},{"Calorias Totais","Valor","Valor"}};
-		
+
+		String colunas[] = { "", "Hoje", "Total" };
+		String dados[][] = { { "Caboidratos", "Valor", "Valor" },
+				{ "Proteinas", "Valor", "Valor" },
+				{ "Gorduras", "Valor", "Valor" },
+				{ "Calorias Totais", "Valor", "Valor" } };
+
 		table = new JTable();
-		
-		DefaultTableCellRenderer letras = 
-		new DefaultTableCellRenderer() {
-			
+
+		DefaultTableCellRenderer letras = new DefaultTableCellRenderer() {
+
 			private static final long serialVersionUID = -5834457900837802725L;
 
 			public void setValue(Object value) {
-				setBackground(new Color(215,215,215));
+				setBackground(new Color(215, 215, 215));
 				setForeground(Color.RED);
 				setHorizontalAlignment(JLabel.CENTER);
-				
+
 				super.setValue(value);
 			}
 		};
-		
+
 		DefaultTableModel model = new DefaultTableModel(dados, colunas);
 		table.setModel(model);
 		javax.swing.table.TableColumn tc = table.getColumn("");
@@ -117,15 +112,14 @@ public class TelaHome extends JPanel {
 		scrollPane.setBounds(69, 150, 401, 91);
 		scrollPane.setViewportView(table);
 		add(scrollPane);
-		
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(Color.LIGHT_GRAY);
 		menuBar.setBounds(424, 11, 97, 21);
-		
+
 		JMenu mnOlusurio = new JMenu("<html><B>Olá [Usuário]</B></html>");
 		mnOlusurio.setBounds(483, 11, 107, 22);
-		
+
 		JMenuItem mntmEditar = new JMenuItem("Editar");
 		mntmEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -145,49 +139,36 @@ public class TelaHome extends JPanel {
 		mnOlusurio.add(mntmSair);
 		menuBar.add(mnOlusurio);
 		add(menuBar);
-		
+
 		JLabel foto = new JLabel("");
 		foto.setHorizontalAlignment(SwingConstants.CENTER);
-		ImageIcon imagens = new ImageIcon(TelaAdicionarRefeicao.class.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
-		Image imagem = imagens.getImage().getScaledInstance(540, 470, Image.SCALE_SMOOTH);
+		ImageIcon imagens = new ImageIcon(
+				TelaAdicionarRefeicao.class
+						.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
+		Image imagem = imagens.getImage().getScaledInstance(540, 470,
+				Image.SCALE_SMOOTH);
 		foto.setIcon(new ImageIcon(imagem));
 		foto.setBounds(0, 0, 540, 470);
 		add(foto);
-		
-		
+
 	}
-	
-	/**
-	 * Delega a operacao adequada do botao AdicionarRefeicao ao manager.
-	 */
+
 	public void btnAddRefeicaoPressionado() {
 		manager.btnAddRefeicaoPressionado();
 	}
-	
-	/**
-	 * Delega a operacao adequada do botao Reset ao manager.
-	 */
+
 	public void btnResetPressionado() {
 		manager.btnResetPressionado();
 	}
-	
-	/**
-	 * Delega a operacao adequada do botao NovaDieta ao manager.
-	 */
+
 	public void btnNovaDietaPressionado() {
 		manager.btnNovaDietaPressionado();
 	}
-	
-	/**
-	 * Delega a operacao adequada do botao Sair ao manager.
-	 */
+
 	public void mnItemSairPressionado() {
 		manager.btnSairPressionado();
 	}
-	
-	/**
-	 * Delega a operacao adequada do botao AtualizarDados ao manager.
-	 */
+
 	public void mnItemAtualizarDadosPressionado() {
 		manager.btnAtualizarDadosPressionado();
 	}

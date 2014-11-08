@@ -1,5 +1,6 @@
 package br.unifor.ads.DOCAL.controller;
 
+import br.unifor.ads.DOCAL_core.entity.Usuario;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerAdicionarRefeicao;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerCadastroDieta;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerCadastroRefeicao;
@@ -9,6 +10,8 @@ import br.unifor.ads.Pin.DOCAL.Manager.ManagerLogin;
 import br.unifor.ads.Pin.DOCAL.Telas.FramePrincipal;
 
 public class Controller {
+	
+	private Usuario loggedUser;
 
 	private FramePrincipal frame;
 	private ManagerLogin managerLogin;
@@ -26,6 +29,10 @@ public class Controller {
 		managerCadRef = new ManagerCadastroRefeicao(this);
 		managerAddRef = new ManagerAdicionarRefeicao(this);
 		frame = new FramePrincipal(managerLogin.getTela());
+	}
+	
+	public void setLoggedUser(Usuario user) {
+		this.loggedUser = user;
 	}
 
 	public void showLogin() {
