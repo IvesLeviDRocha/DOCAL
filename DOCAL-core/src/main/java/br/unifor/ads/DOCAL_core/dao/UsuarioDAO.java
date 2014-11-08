@@ -32,6 +32,7 @@ public class UsuarioDAO {
 				usuario.getPeso(), usuario.getLogin(), usuario.getSenha());
 	}
 
+
 	public static Usuario buscarPorNome(String nome) {
 		String sql = "select id, nome, altura, peso, login, senha from usuario where nome = ?";
 		return (Usuario) em.getSingleResult(sql, nome);

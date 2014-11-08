@@ -21,6 +21,7 @@ public class DietaDAO {
 				dieta.setProteinas(result.getFloat("proteinas"));
 				dieta.setGorduras(result.getFloat("gorduras"));
 				dieta.setUsuario_id(UsuarioDAO.findById(result.getInt("id")));
+				dieta.setCalorias(result.getFloat("calorias"));
 			}
 			return dieta;
 		}
@@ -46,5 +47,6 @@ public class DietaDAO {
 	public static void excluir(Dieta dieta) {
 		String sql = "delete from dieta where id = ?";
 		em.execute(sql, dieta.getId());
+
 	}
 }

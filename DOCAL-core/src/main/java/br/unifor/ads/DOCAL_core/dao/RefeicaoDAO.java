@@ -21,6 +21,7 @@ public class RefeicaoDAO {
 				refeicao.setProteinas(result.getFloat("proteinas"));
 				refeicao.setGorduras(result.getFloat("gorduras"));
 				refeicao.setUsuario_id(UsuarioDAO.findById(result.getInt("id")));
+				refeicao.setCalorias(result.getFloat("calorias"));
 			}
 			return refeicao;
 		}
