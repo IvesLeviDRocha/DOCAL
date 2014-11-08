@@ -13,7 +13,7 @@ public class DietaDAO {
 		@Override
 		public Object trataResultSet(ResultSet result) throws SQLException {
 			Dieta dieta = null;
-			if (result.next()) {
+			if (result != null) {
 				dieta = new Dieta();
 				dieta.setId(result.getInt("id"));
 				dieta.setNome(result.getString("nome"));
@@ -21,7 +21,6 @@ public class DietaDAO {
 				dieta.setProteinas(result.getFloat("proteinas"));
 				dieta.setGorduras(result.getFloat("gorduras"));
 				dieta.setUsuario_id(UsuarioDAO.findById(result.getInt("id")));
-				dieta.setCalorias(result.getFloat("calorias"));
 			}
 			return dieta;
 		}

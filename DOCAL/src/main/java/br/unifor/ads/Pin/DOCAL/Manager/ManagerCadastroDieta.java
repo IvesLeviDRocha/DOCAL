@@ -1,6 +1,8 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
 import br.unifor.ads.DOCAL.controller.Controller;
+import br.unifor.ads.DOCAL_core.entity.Dieta;
+import br.unifor.ads.DOCAL_core.entity.Usuario;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaCadastroDieta;
 
 /**
@@ -21,7 +23,10 @@ public class ManagerCadastroDieta {
 		return tela;
 	}
 
-	public void btnCadastrarPressionado() {
+	public void btnCadastrarPressionado(String nome, String carb, String prot,
+			String gord) {
+		Dieta dieta = createDieta(nome, carb, prot, gord);
+		controller.registerDieta(dieta);
 		controller.showHome();
 		tela.limparFormularios();
 	}
@@ -29,6 +34,15 @@ public class ManagerCadastroDieta {
 	public void btnCancelarPressionado() {
 		controller.showHome();
 		tela.limparFormularios();
+	}
+
+	public Dieta createDieta(String nome, String carb, String prot, String gord) {
+		Float carbNum = Float.parseFloat(carb);
+		Float protNum = Float.parseFloat(prot);
+		Float gordNum = Float.parseFloat(gord);
+		Usuario user = controller.getLoggedUser();
+		Dieta dieta = new Dieta(user, nome, carbNum, protNum, gordNum);
+		return dieta;
 	}
 
 }

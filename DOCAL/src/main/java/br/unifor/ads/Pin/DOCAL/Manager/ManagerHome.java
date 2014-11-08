@@ -41,19 +41,17 @@ public class ManagerHome {
 	}
 
 	public void btnResetPressionado() {
-		JOptionPane.showConfirmDialog(controller.getFrame(),
-				"Deseja resetar a contagem atual?", "Reset",
-				JOptionPane.YES_NO_OPTION);
+		JOptionPane.showConfirmDialog(tela, "Deseja resetar a contagem atual?",
+				"Reset", JOptionPane.YES_NO_OPTION);
 	}
 
 	public void btnNovaDietaPressionado() {
 		controller.showCadastroDieta();
-
 	}
 
 	public void btnSairPressionado() {
-		int op = JOptionPane.showConfirmDialog(controller.getFrame(), "Sair?",
-				"Sair", JOptionPane.YES_NO_OPTION);
+		int op = JOptionPane.showConfirmDialog(tela, "Sair?", "Sair",
+				JOptionPane.YES_NO_OPTION);
 		switch (op) {
 		case 0:
 			controller.showLogin();
@@ -65,11 +63,9 @@ public class ManagerHome {
 	}
 
 	public void btnAtualizarDadosPressionado() {
-		JOptionPane.showInputDialog(controller.getFrame(),
-				"Digite nova altura:");
-		JOptionPane.showInputDialog(controller.getFrame(), "Digite novo peso:");
-		JOptionPane.showMessageDialog(controller.getFrame(),
-				"Dados atualizados.");
+		JOptionPane.showInputDialog(tela, "Digite nova altura:");
+		JOptionPane.showInputDialog(tela, "Digite novo peso:");
+		JOptionPane.showMessageDialog(tela, "Dados atualizados.");
 	}
 
 }

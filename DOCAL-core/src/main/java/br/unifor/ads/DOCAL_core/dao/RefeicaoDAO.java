@@ -13,7 +13,7 @@ public class RefeicaoDAO {
 		@Override
 		public Object trataResultSet(ResultSet result) throws SQLException {
 			Refeicao refeicao = null;
-			if (result.next()) {
+			if (result != null) {
 				refeicao = new Refeicao();
 				refeicao.setId(result.getInt("id"));
 				refeicao.setNome(result.getString("nome"));
@@ -21,7 +21,6 @@ public class RefeicaoDAO {
 				refeicao.setProteinas(result.getFloat("proteinas"));
 				refeicao.setGorduras(result.getFloat("gorduras"));
 				refeicao.setUsuario_id(UsuarioDAO.findById(result.getInt("id")));
-				refeicao.setCalorias(result.getFloat("calorias"));
 			}
 			return refeicao;
 		}

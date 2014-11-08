@@ -14,6 +14,18 @@ public class Dieta implements Serializable {
 	private Float gorduras;
 	private Float calorias;
 
+	public Dieta() {
+	}
+
+	public Dieta(Usuario usuario_id, String nome, Float carboidratos,
+			Float proteinas, Float gorduras) {
+		this.usuario_id = usuario_id;
+		this.nome = nome;
+		this.carboidratos = carboidratos;
+		this.proteinas = proteinas;
+		this.gorduras = gorduras;
+	}
+
 	public Integer getId() {
 		return id;
 	}

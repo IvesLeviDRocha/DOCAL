@@ -2,6 +2,7 @@ package br.unifor.ads.Pin.DOCAL.Telas;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
@@ -137,7 +138,15 @@ public class TelaCadastroDieta extends JPanel {
 	}
 
 	public void btnCadastrarPressionado() {
-		manager.btnCadastrarPressionado();
+		if (checkFieldsNotEmpty()) {
+			String nome = textFieldNome.getText();
+			String carb = formattedTextFieldCarb.getText();
+			String prot = formattedTextFieldProt.getText();
+			String gord = formattedTextFieldGord.getText();
+			manager.btnCadastrarPressionado(nome, carb, prot, gord);
+		} else {
+			JOptionPane.showMessageDialog(this, "Campos em branco!");
+		}
 	}
 
 	public void btnCancelarPressionado() {
@@ -149,6 +158,17 @@ public class TelaCadastroDieta extends JPanel {
 		formattedTextFieldCarb.setText("");
 		formattedTextFieldProt.setText("");
 		formattedTextFieldGord.setText("");
+	}
+
+	public boolean checkFieldsNotEmpty() {
+		if (textFieldNome.getText().equals("")
+				|| formattedTextFieldCarb.getText().equals("")
+				|| formattedTextFieldProt.getText().equals("")
+				|| formattedTextFieldGord.getText().equals("")) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }
