@@ -12,7 +12,6 @@ public class Dieta implements Serializable {
 	private Float carboidratos;
 	private Float proteinas;
 	private Float gorduras;
-	private Float calorias;
 
 	public Dieta() {
 	}
@@ -75,11 +74,8 @@ public class Dieta implements Serializable {
 	}
 
 	public Float getCalorias() {
+		Float calorias = carboidratos * 4 + proteinas * 4 + gorduras * 9;
 		return calorias;
-	}
-
-	public void setCalorias(Float calorias) {
-		this.calorias = calorias;
 	}
 
 }

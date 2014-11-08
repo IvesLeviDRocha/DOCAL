@@ -34,17 +34,17 @@ public class TelaHome extends JPanel {
 	private static final long serialVersionUID = 2857670324681532711L;
 
 	private ManagerHome manager;
-	
+
 	private JTable table;
 	DefaultTableModel model;
 	JMenu mnOlaUsuario;
+	JLabel lblDieta;
 
 	private String[] colunas = { "", "Hoje", "Total" };
 	private String[][] dados = { { "Caboidratos", "Valor", "Valor" },
 			{ "Proteinas", "Valor", "Valor" },
 			{ "Gorduras", "Valor", "Valor" },
 			{ "Calorias Totais", "Valor", "Valor" } };
-	
 
 	public TelaHome(ManagerHome manager) {
 		setBackground(Color.WHITE);
@@ -56,7 +56,7 @@ public class TelaHome extends JPanel {
 		setLayout(null);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		JLabel lblDieta = new JLabel("Dieta: [Dieta]", SwingConstants.CENTER);
+		lblDieta = new JLabel("Dieta: [Dieta]", SwingConstants.CENTER);
 		lblDieta.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 24));
 		lblDieta.setBounds(206, 73, 138, 37);
 		add(lblDieta);
@@ -96,6 +96,9 @@ public class TelaHome extends JPanel {
 		add(btnNovaDieta);
 
 		table = new JTable();
+		table.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 16));
+		table.setRowHeight(22);
+		table.setPreferredScrollableViewportSize(table.getSize());
 
 		DefaultTableCellRenderer letras = new DefaultTableCellRenderer() {
 
@@ -105,7 +108,7 @@ public class TelaHome extends JPanel {
 				setBackground(new Color(215, 215, 215));
 				setForeground(Color.RED);
 				setHorizontalAlignment(JLabel.CENTER);
-
+				setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 16));
 				super.setValue(value);
 			}
 		};
@@ -115,7 +118,7 @@ public class TelaHome extends JPanel {
 		javax.swing.table.TableColumn tc = table.getColumn("");
 		tc.setCellRenderer(letras);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(69, 150, 401, 91);
+		scrollPane.setBounds(69, 150, 401, 104);
 		scrollPane.setViewportView(table);
 		add(scrollPane);
 
@@ -182,20 +185,23 @@ public class TelaHome extends JPanel {
 	public JTable getTable() {
 		return table;
 	}
-	
+
 	public void updateUserData(String username, Dieta dieta) {
 		updateUserName(username);
 		updateTableDieta(dieta);
 	}
-	
+
 	public void updateUserName(String username) {
-		mnOlaUsuario.setText("<html><B>Olá "+username+" !</B></html>");
+		mnOlaUsuario.setText("<html><B>Olá " + username + " !</B></html>");
 	}
-	
+
 	public void updateTableDieta(Dieta dieta) {
-		dados[0][1] = String.valueOf(dieta.getCarboidratos());
-		dados[1][1] = String.valueOf(dieta.getProteinas());
-		dados[2][1] = String.valueOf(dieta.getGorduras());
+		lblDieta.setText("Dieta: " + dieta.getNome());
+		lblDieta.setSize(new Dimension(lblDieta.getPreferredSize()));
+		dados[0][2] = String.valueOf(dieta.getCarboidratos());
+		dados[1][2] = String.valueOf(dieta.getProteinas());
+		dados[2][2] = String.valueOf(dieta.getGorduras());
+		dados[3][2] = String.valueOf(dieta.getCalorias());
 		refreshTable();
 	}
 
