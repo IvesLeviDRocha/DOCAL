@@ -7,13 +7,12 @@ import com.jolbox.bonecp.BoneCP;
 import com.jolbox.bonecp.BoneCPConfig;
 
 /**
- * Esta classe tem a responsabilidade de ser o pool de conexoes
- * da aplicacao.
+ * Esta classe tem a responsabilidade de ser o pool de conexoes da aplicacao.
  */
 public class ConnectionPool {
-	
+
 	private static final BoneCP POOL = initPool();
-	
+
 	private static BoneCP initPool() {
 		BoneCPConfig config = initConfig();
 		try {
@@ -35,7 +34,7 @@ public class ConnectionPool {
 		config.setPartitionCount(1);
 		return config;
 	}
-	
+
 	public static Connection getConnection() throws SQLException {
 		return POOL.getConnection();
 	}

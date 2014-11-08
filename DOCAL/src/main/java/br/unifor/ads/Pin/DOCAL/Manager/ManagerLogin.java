@@ -1,50 +1,38 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
-import br.unifor.ads.Pin.DOCAL.Telas.FramePrincipal;
+import br.unifor.ads.DOCAL.controller.Controller;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaLogin;
 
 /**
- * Esta classe tem por responsabilidade realizar a conexao
- * entre TelaLogin e o resto da aplicacao.
+ * Esta classe tem por responsabilidade realizar a conexao entre TelaLogin e o
+ * resto da aplicacao.
  */
-public class ManagerLogin extends Manager {
+public class ManagerLogin {
 
+	private Controller controller;
 	private TelaLogin tela;
 
-	/**
-	 * Cria o manager e sua TelaLogin.
-	 * @param o FramePrincipal responsavel por mostrar a tela.
-	 */
-	public ManagerLogin(FramePrincipal frame) {
-		super(frame);
+	public ManagerLogin(Controller controller) {
+		this.controller = controller;
 		this.tela = new TelaLogin(this);
 	}
-	
-	/**
-	 * @return a TelaLogin deste manager.
-	 */
+
 	public TelaLogin getTela() {
 		return tela;
 	}
-	
-	/**
-	 * Operacao relativa ao botao Entrar.
-	 */
+
 	public void btnEntrarPressionado() {
-		getFrame().mostrarHome();
+		controller.showHome();
 		tela.limparFormularios();
 	}
-	
-	/**
-	 * Operacao relativa ao botao Cadastrar.
-	 */
+
 	public void lblCadastrarPressionado() {
-		getFrame().mostrarCadastroUsuario();
+		controller.showCadastroUsuario();
 		tela.limparFormularios();
 	}
-	
+
 	public void btnSairPressionado() {
-		getFrame().setVisible(false);
+		controller.sair();
 	}
-	
+
 }

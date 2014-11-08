@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Dieta implements Serializable {
 
 	private static final long serialVersionUID = -3956463124025421223L;
-	
+
 	private Integer id;
 	private Usuario usuario_id;
 	private String nome;

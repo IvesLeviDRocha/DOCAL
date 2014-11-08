@@ -1,56 +1,38 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
-import javax.swing.JOptionPane;
-
-import br.unifor.ads.Pin.DOCAL.Telas.FramePrincipal;
+import br.unifor.ads.DOCAL.controller.Controller;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaCadastroUsuario;
 
 /**
- * Esta classe tem por responsabilidade realizar a conexao
- * entre TelaCadastroUsuario e o resto da aplicacao.
+ * Esta classe tem por responsabilidade realizar a conexao entre
+ * TelaCadastroUsuario e o resto da aplicacao.
  */
-public class ManagerCadastroUsuario extends Manager {
+public class ManagerCadastroUsuario {
 
+	private Controller controller;
 	private TelaCadastroUsuario tela;
-	
-	/**
-	 * Cria o manager e sua TelaCadastroUsuario.
-	 * @param o FramePrincipal responsavel por mostrar a tela.
-	 */
-	public ManagerCadastroUsuario(FramePrincipal frame) {
-		super(frame);
+
+	public ManagerCadastroUsuario(Controller controller) {
+		this.controller = controller;
 		this.tela = new TelaCadastroUsuario(this);
 	}
-	
-	/**
-	 * 
-	 * @return a TelaCadastroUsuario deste manager.
-	 */
+
 	public TelaCadastroUsuario getTela() {
 		return tela;
 	}
-	
-	/**
-	 * Operacao relativa ao botao Cancelar.
-	 */
+
 	public void btnCancelarPressionado() {
-		getFrame().mostrarLogin();
+		controller.showLogin();
 		tela.limparFormularios();
 	}
-	
-	/**
-	 * Operacao relativa ao botao Cadastrar.
-	 */
+
 	public void btnCadastrarPressionado() {
-		getFrame().mostrarHome();
+		controller.showHome();
 		tela.limparFormularios();
 	}
-	
-	/**
-	 * Operacao relativa ao botao Limpar.
-	 */
+
 	public void btnLimparPressionado() {
 		tela.limparFormularios();
 	}
-	
+
 }

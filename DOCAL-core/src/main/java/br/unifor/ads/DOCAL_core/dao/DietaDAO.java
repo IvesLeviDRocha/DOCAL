@@ -9,7 +9,7 @@ import br.unifor.ads.DOCAL_core.entity.Dieta;
 
 public class DietaDAO {
 
-	private EntityManager em = new EntityManager() {
+	private static EntityManager em = new EntityManager() {
 		@Override
 		public Object trataResultSet(ResultSet result) throws SQLException {
 			Dieta dieta = null;
@@ -17,28 +17,34 @@ public class DietaDAO {
 				dieta = new Dieta();
 				dieta.setId(result.getInt("id"));
 				dieta.setNome(result.getString("nome"));
+				dieta.setCarboidratos(result.getFloat("carboidratos"));
+				dieta.setProteinas(result.getFloat("proteinas"));
+				dieta.setGorduras(result.getFloat("gorduras"));
+				dieta.setUsuario_id(UsuarioDAO.findById(result.getInt("id")));
 			}
 			return dieta;
 		}
 	};
 
-	public void inserir(Dieta dieta) {
-		String sql = "insert into dieta (nome) values (?)";
-		em.execute(sql, dieta.getNome());
+	public static void inserir(Dieta dieta) {
+		String sql = "insert into dieta (usuario_id, nome, carboidratos, proteinas, gorduras) values (?, ?, ?, ?, ?)";
+		em.execute(sql, dieta.getUsuario_id().getId(), dieta.getNome(),
+				dieta.getCarboidratos(), dieta.getProteinas(),
+				dieta.getGorduras());
 	}
 
-	public Dieta buscarPorNome(String nome) {
-		String sql = "select id, nome from dieta where nome = ?";
+	public static Dieta buscarPorNome(String nome) {
+		String sql = "select id, nome, usuario_id, carboidratos, proteinas, gorduras from dieta where nome = ?";
 		return (Dieta) em.getSingleResult(sql, nome);
 	}
 
-	public List<Object> buscarTodos() {
-		String sql = "select id, nome from dieta";
+	public static List<Object> buscarTodos() {
+		String sql = "select id, nome, usuario_id, carboidratos, proteinas, gorduras from dieta";
 		return em.resultList(sql);
 	}
 
-	public void excluir(Dieta dieta) {
-		String sql = "delete from dieta where nome = ?";
-		em.execute(sql, dieta.getNome());
+	public static void excluir(Dieta dieta) {
+		String sql = "delete from dieta where id = ?";
+		em.execute(sql, dieta.getId());
 	}
 }
