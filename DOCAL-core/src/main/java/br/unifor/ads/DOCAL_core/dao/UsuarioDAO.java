@@ -13,7 +13,7 @@ public class UsuarioDAO {
 		@Override
 		public Object trataResultSet(ResultSet result) throws SQLException {
 			Usuario usuario = null;
-			if (result.next()) {
+			if (result != null) {
 				usuario = new Usuario();
 				usuario.setId(result.getInt("id"));
 				usuario.setNome(result.getString("nome"));
@@ -32,7 +32,6 @@ public class UsuarioDAO {
 				usuario.getPeso(), usuario.getLogin(), usuario.getSenha());
 	}
 
-
 	public static Usuario buscarPorNome(String nome) {
 		String sql = "select id, nome, altura, peso, login, senha from usuario where nome = ?";
 		return (Usuario) em.getSingleResult(sql, nome);
@@ -42,7 +41,7 @@ public class UsuarioDAO {
 		String sql = "select id, nome, altura, peso, login, senha from usuario where id = ?";
 		return (Usuario) em.getSingleResult(sql, Id);
 	}
-	
+
 	public static Usuario findByLogin(String login) {
 		String sql = "select id, nome, altura, peso, login, senha from usuario where login = ?";
 		return (Usuario) em.getSingleResult(sql, login);

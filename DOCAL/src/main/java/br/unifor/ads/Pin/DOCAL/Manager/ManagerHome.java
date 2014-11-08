@@ -1,10 +1,11 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 import br.unifor.ads.DOCAL.controller.Controller;
+import br.unifor.ads.DOCAL_core.dao.DietaDAO;
 import br.unifor.ads.DOCAL_core.entity.Dieta;
+import br.unifor.ads.DOCAL_core.entity.Usuario;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaHome;
 
 /**
@@ -16,17 +17,21 @@ public class ManagerHome {
 	private Controller controller;
 	private TelaHome tela;
 
-	private String[][] dados = { { "Caboidratos", "Valor", "Valor" },
-			{ "Proteinas", "Valor", "Valor" },
-			{ "Gorduras", "Valor", "Valor" },
-			{ "Calorias Totais", "Valor", "Valor" } };
-
 	public ManagerHome(Controller controller) {
 		this.controller = controller;
 		this.tela = new TelaHome(this);
 	}
 
 	public TelaHome getTela() {
+		Usuario loggedUser = controller.getLoggedUser();
+		Dieta userDiet = DietaDAO.findByUsuarioId(loggedUser.getId());
+		if (userDiet == null) {
+			JOptionPane.showMessageDialog(tela,
+					"Você não possui nenhuma dieta cadastrada.");
+			tela.updateUserName(loggedUser.getNome());
+		} else {
+			tela.updateUserData(loggedUser.getNome(), userDiet);
+		}
 		return tela;
 	}
 
@@ -67,14 +72,4 @@ public class ManagerHome {
 				"Dados atualizados.");
 	}
 
-	public void updateTableDieta(Dieta dieta) {
-		dados[0][1] = String.valueOf(dieta.getCarboidratos());
-		dados[1][1] = String.valueOf(dieta.getProteinas());
-		dados[2][1] = String.valueOf(dieta.getGorduras());
-		tela.refreshTable();
-	}
-
-	public String[][] getDados() {
-		return dados;
-	}
 }

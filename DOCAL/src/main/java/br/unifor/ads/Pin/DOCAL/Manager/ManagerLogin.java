@@ -45,11 +45,16 @@ public class ManagerLogin {
 	
 	public boolean logUser(String login, String senha) {
 		Usuario user = UsuarioDAO.findByLogin(login);
-		if (user.getSenha().equals(senha)) {
-			controller.setLoggedUser(user);
-			return true;
-		} else {
+		if (user == null) {
+			JOptionPane.showMessageDialog(tela, "Unable to find user");
 			return false;
+		} else {
+			if (user.getSenha().equals(senha)) {
+				controller.setLoggedUser(user);
+				return true;
+			} else {
+				return false;
+			}		
 		}
 	}
 

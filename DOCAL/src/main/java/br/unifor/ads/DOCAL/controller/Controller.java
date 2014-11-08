@@ -1,5 +1,6 @@
 package br.unifor.ads.DOCAL.controller;
 
+import br.unifor.ads.DOCAL_core.dao.UsuarioDAO;
 import br.unifor.ads.DOCAL_core.entity.Usuario;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerAdicionarRefeicao;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerCadastroDieta;
@@ -69,6 +70,10 @@ public class Controller {
 
 	public FramePrincipal getFrame() {
 		return frame;
+	}
+	
+	public void registerUsuario(Usuario user) {
+		UsuarioDAO.inserir(user);
 	}
 
 }

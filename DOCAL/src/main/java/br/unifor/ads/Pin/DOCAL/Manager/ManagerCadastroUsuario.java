@@ -1,6 +1,7 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
 import br.unifor.ads.DOCAL.controller.Controller;
+import br.unifor.ads.DOCAL_core.entity.Usuario;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaCadastroUsuario;
 
 /**
@@ -26,13 +27,24 @@ public class ManagerCadastroUsuario {
 		tela.limparFormularios();
 	}
 
-	public void btnCadastrarPressionado() {
-		controller.showHome();
+	public void btnCadastrarPressionado(String nome, String login,
+			String senha, String altura, String peso) {
+		Usuario user = createUsuario(nome, login, senha, altura, peso);
+		controller.registerUsuario(user);
+		controller.showLogin();
 		tela.limparFormularios();
 	}
 
 	public void btnLimparPressionado() {
 		tela.limparFormularios();
+	}
+
+	public Usuario createUsuario(String nome, String login,
+			String senha, String altura, String peso) {
+		Float alturaNum = Float.parseFloat(altura);
+		Float pesoNum = Float.parseFloat(peso);
+		Usuario user = new Usuario(nome, login, senha, alturaNum, pesoNum);
+		return user;
 	}
 
 }

@@ -1,29 +1,25 @@
 package br.unifor.ads.Pin.DOCAL.Telas;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import javax.swing.JButton;
-
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import java.awt.Dimension;
-import java.awt.Image;
-
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.text.MaskFormatter;
 
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerCadastroUsuario;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-import java.awt.Color;
 
 /**
  * Esta classe e responsavel por manter os componentes relativos ao cadastro do
@@ -127,7 +123,7 @@ public class TelaCadastroUsuario extends JPanel {
 		add(lblAltura);
 
 		try {
-			MaskFormatter altura = new MaskFormatter("#.###");
+			MaskFormatter altura = new MaskFormatter("#.##");
 			textFieldAltura = new JFormattedTextField(altura);
 			textFieldAltura.setFont(new Font("Microsoft Sans Serif",
 					Font.PLAIN, 14));
@@ -192,7 +188,19 @@ public class TelaCadastroUsuario extends JPanel {
 	}
 
 	public void btnCadastrarPressionado() {
-		manager.btnCadastrarPressionado();
+		if (checkFieldsNotEmpty()) {
+			if (checkPasswordsMatch()) {
+				manager.btnCadastrarPressionado(textFieldNome.getText(),
+						textFieldLogin.getText(),
+						new String(passwordFieldSenha.getPassword()),
+						textFieldAltura.getText(), textFieldPeso.getText());
+			} else {
+				JOptionPane.showMessageDialog(this,
+						"Confirmação de senha incorreta");
+			}
+		} else {
+			JOptionPane.showMessageDialog(this, "Campo(s) em branco!");
+		}
 	}
 
 	public void btnLimparPressionado() {
@@ -206,6 +214,29 @@ public class TelaCadastroUsuario extends JPanel {
 		textFieldLogin.setText("");
 		passwordFieldConfSenha.setText("");
 		passwordFieldSenha.setText("");
+	}
+
+	public boolean checkFieldsNotEmpty() {
+		if (textFieldLogin.getText().equals("")
+				|| textFieldNome.getText().equals("")
+				|| textFieldAltura.getText().equals("")
+				|| textFieldPeso.getText().equals("")
+				|| passwordFieldConfSenha.getPassword().length == 0
+				|| passwordFieldSenha.getPassword().length == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public boolean checkPasswordsMatch() {
+		String pass = new String(passwordFieldSenha.getPassword());
+		String pass2 = new String(passwordFieldConfSenha.getPassword());
+		if (pass.equals(pass2)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.unifor.ads.DOCAL_core.dao.EntityManager;
 import br.unifor.ads.DOCAL_core.entity.Dieta;
+import br.unifor.ads.DOCAL_core.entity.Usuario;
 
 public class DietaDAO {
 
@@ -37,6 +37,11 @@ public class DietaDAO {
 	public static Dieta buscarPorNome(String nome) {
 		String sql = "select id, nome, usuario_id, carboidratos, proteinas, gorduras from dieta where nome = ?";
 		return (Dieta) em.getSingleResult(sql, nome);
+	}
+	
+	public static Dieta findByUsuarioId(Integer usuarioId) {
+		String sql = "select id, nome, usuario_id, carboidratos, proteinas, gorduras from dieta where usuario_id = ?";
+		return (Dieta) em.getSingleResult(sql, usuarioId);
 	}
 
 	public static List<Object> buscarTodos() {

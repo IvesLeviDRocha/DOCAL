@@ -21,6 +21,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import br.unifor.ads.DOCAL_core.entity.Dieta;
+import br.unifor.ads.DOCAL_core.entity.Usuario;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerHome;
 
 /**
@@ -32,11 +34,18 @@ public class TelaHome extends JPanel {
 	private static final long serialVersionUID = 2857670324681532711L;
 
 	private ManagerHome manager;
+	
 	private JTable table;
+	DefaultTableModel model;
+	JMenu mnOlaUsuario;
 
 	private String[] colunas = { "", "Hoje", "Total" };
-	DefaultTableModel model;
+	private String[][] dados = { { "Caboidratos", "Valor", "Valor" },
+			{ "Proteinas", "Valor", "Valor" },
+			{ "Gorduras", "Valor", "Valor" },
+			{ "Calorias Totais", "Valor", "Valor" } };
 	
+
 	public TelaHome(ManagerHome manager) {
 		setBackground(Color.WHITE);
 
@@ -101,8 +110,7 @@ public class TelaHome extends JPanel {
 			}
 		};
 
-		model = new DefaultTableModel(manager.getDados(),
-				colunas);
+		model = new DefaultTableModel(dados, colunas);
 		table.setModel(model);
 		javax.swing.table.TableColumn tc = table.getColumn("");
 		tc.setCellRenderer(letras);
@@ -115,8 +123,8 @@ public class TelaHome extends JPanel {
 		menuBar.setBackground(Color.LIGHT_GRAY);
 		menuBar.setBounds(424, 11, 97, 21);
 
-		JMenu mnOlusurio = new JMenu("<html><B>Olá [Usuário]</B></html>");
-		mnOlusurio.setBounds(483, 11, 107, 22);
+		mnOlaUsuario = new JMenu("<html><B>Olá [Usuário]</B></html>");
+		mnOlaUsuario.setBounds(483, 11, 107, 22);
 
 		JMenuItem mntmEditar = new JMenuItem("Editar");
 		mntmEditar.addActionListener(new ActionListener() {
@@ -133,9 +141,9 @@ public class TelaHome extends JPanel {
 		});
 		mntmSair.setBounds(95, 21, 129, 22);
 
-		mnOlusurio.add(mntmEditar);
-		mnOlusurio.add(mntmSair);
-		menuBar.add(mnOlusurio);
+		mnOlaUsuario.add(mntmEditar);
+		mnOlaUsuario.add(mntmSair);
+		menuBar.add(mnOlaUsuario);
 		add(menuBar);
 
 		JLabel foto = new JLabel("");
@@ -175,8 +183,24 @@ public class TelaHome extends JPanel {
 		return table;
 	}
 	
+	public void updateUserData(String username, Dieta dieta) {
+		updateUserName(username);
+		updateTableDieta(dieta);
+	}
+	
+	public void updateUserName(String username) {
+		mnOlaUsuario.setText("<html><B>Olá "+username+" !</B></html>");
+	}
+	
+	public void updateTableDieta(Dieta dieta) {
+		dados[0][1] = String.valueOf(dieta.getCarboidratos());
+		dados[1][1] = String.valueOf(dieta.getProteinas());
+		dados[2][1] = String.valueOf(dieta.getGorduras());
+		refreshTable();
+	}
+
 	public void refreshTable() {
-		model.setDataVector(manager.getDados(), colunas);
+		model.setDataVector(dados, colunas);
 		model.fireTableDataChanged();
 	}
 }
