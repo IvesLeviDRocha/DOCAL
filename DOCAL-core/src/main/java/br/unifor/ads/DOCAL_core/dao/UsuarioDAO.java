@@ -42,6 +42,11 @@ public class UsuarioDAO {
 		String sql = "select id, nome, altura, peso, login, senha from usuario where id = ?";
 		return (Usuario) em.getSingleResult(sql, Id);
 	}
+	
+	public static Usuario findByLogin(String login) {
+		String sql = "select id, nome, altura, peso, login, senha from usuario where login = ?";
+		return (Usuario) em.getSingleResult(sql, login);
+	}
 
 	public static List<Object> buscarTodos() {
 		String sql = "select id, nome, altura, peso, login, senha from usuario";

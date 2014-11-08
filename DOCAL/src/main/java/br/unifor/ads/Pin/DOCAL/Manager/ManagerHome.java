@@ -1,8 +1,10 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 import br.unifor.ads.DOCAL.controller.Controller;
+import br.unifor.ads.DOCAL_core.entity.Dieta;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaHome;
 
 /**
@@ -13,6 +15,11 @@ public class ManagerHome {
 
 	private Controller controller;
 	private TelaHome tela;
+
+	private String[][] dados = { { "Caboidratos", "Valor", "Valor" },
+			{ "Proteinas", "Valor", "Valor" },
+			{ "Gorduras", "Valor", "Valor" },
+			{ "Calorias Totais", "Valor", "Valor" } };
 
 	public ManagerHome(Controller controller) {
 		this.controller = controller;
@@ -58,5 +65,16 @@ public class ManagerHome {
 		JOptionPane.showInputDialog(controller.getFrame(), "Digite novo peso:");
 		JOptionPane.showMessageDialog(controller.getFrame(),
 				"Dados atualizados.");
+	}
+
+	public void updateTableDieta(Dieta dieta) {
+		dados[0][1] = String.valueOf(dieta.getCarboidratos());
+		dados[1][1] = String.valueOf(dieta.getProteinas());
+		dados[2][1] = String.valueOf(dieta.getGorduras());
+		tela.refreshTable();
+	}
+
+	public String[][] getDados() {
+		return dados;
 	}
 }

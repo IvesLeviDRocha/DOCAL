@@ -34,6 +34,9 @@ public class TelaHome extends JPanel {
 	private ManagerHome manager;
 	private JTable table;
 
+	private String[] colunas = { "", "Hoje", "Total" };
+	DefaultTableModel model;
+	
 	public TelaHome(ManagerHome manager) {
 		setBackground(Color.WHITE);
 
@@ -83,12 +86,6 @@ public class TelaHome extends JPanel {
 		btnNovaDieta.setBounds(31, 342, 127, 27);
 		add(btnNovaDieta);
 
-		String colunas[] = { "", "Hoje", "Total" };
-		String dados[][] = { { "Caboidratos", "Valor", "Valor" },
-				{ "Proteinas", "Valor", "Valor" },
-				{ "Gorduras", "Valor", "Valor" },
-				{ "Calorias Totais", "Valor", "Valor" } };
-
 		table = new JTable();
 
 		DefaultTableCellRenderer letras = new DefaultTableCellRenderer() {
@@ -104,7 +101,8 @@ public class TelaHome extends JPanel {
 			}
 		};
 
-		DefaultTableModel model = new DefaultTableModel(dados, colunas);
+		model = new DefaultTableModel(manager.getDados(),
+				colunas);
 		table.setModel(model);
 		javax.swing.table.TableColumn tc = table.getColumn("");
 		tc.setCellRenderer(letras);
@@ -171,5 +169,14 @@ public class TelaHome extends JPanel {
 
 	public void mnItemAtualizarDadosPressionado() {
 		manager.btnAtualizarDadosPressionado();
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+	
+	public void refreshTable() {
+		model.setDataVector(manager.getDados(), colunas);
+		model.fireTableDataChanged();
 	}
 }

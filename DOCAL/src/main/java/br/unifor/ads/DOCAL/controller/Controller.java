@@ -10,7 +10,7 @@ import br.unifor.ads.Pin.DOCAL.Manager.ManagerLogin;
 import br.unifor.ads.Pin.DOCAL.Telas.FramePrincipal;
 
 public class Controller {
-	
+
 	private Usuario loggedUser;
 
 	private FramePrincipal frame;
@@ -30,9 +30,13 @@ public class Controller {
 		managerAddRef = new ManagerAdicionarRefeicao(this);
 		frame = new FramePrincipal(managerLogin.getTela());
 	}
-	
+
 	public void setLoggedUser(Usuario user) {
 		this.loggedUser = user;
+	}
+
+	public Usuario getLoggedUser() {
+		return loggedUser;
 	}
 
 	public void showLogin() {

@@ -130,7 +130,9 @@ public class TelaLogin extends JPanel {
 	}
 
 	public void btnEntrarPressionado() {
-		manager.btnEntrarPressionado();
+		String login = textFieldUsuario.getText();
+		String senha = new String(passwordFieldSenha.getPassword());
+		manager.btnEntrarPressionado(login, senha);
 	}
 
 	public void lblCadastrarPressionado() {
