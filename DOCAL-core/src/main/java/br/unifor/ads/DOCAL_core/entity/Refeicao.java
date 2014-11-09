@@ -12,7 +12,18 @@ public class Refeicao implements Serializable {
 	private Float carboidratos;
 	private Float proteinas;
 	private Float gorduras;
-	private Float calorias;
+
+	public Refeicao() {
+	}
+
+	public Refeicao(Usuario usuario_id, String nome, Float carboidratos,
+			Float proteinas, Float gorduras) {
+		this.usuario_id = usuario_id;
+		this.nome = nome.toLowerCase();
+		this.carboidratos = carboidratos;
+		this.proteinas = proteinas;
+		this.gorduras = gorduras;
+	}
 
 	public Integer getId() {
 		return id;
@@ -63,11 +74,8 @@ public class Refeicao implements Serializable {
 	}
 
 	public Float getCalorias() {
+		Float calorias = carboidratos * 4 + proteinas * 4 + gorduras * 9;
 		return calorias;
-	}
-
-	public void setCalorias(Float calorias) {
-		this.calorias = calorias;
 	}
 
 }

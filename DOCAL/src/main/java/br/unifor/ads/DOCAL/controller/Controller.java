@@ -1,8 +1,10 @@
 package br.unifor.ads.DOCAL.controller;
 
 import br.unifor.ads.DOCAL_core.dao.DietaDAO;
+import br.unifor.ads.DOCAL_core.dao.RefeicaoDAO;
 import br.unifor.ads.DOCAL_core.dao.UsuarioDAO;
 import br.unifor.ads.DOCAL_core.entity.Dieta;
+import br.unifor.ads.DOCAL_core.entity.Refeicao;
 import br.unifor.ads.DOCAL_core.entity.Usuario;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerAdicionarRefeicao;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerCadastroDieta;
@@ -80,6 +82,10 @@ public class Controller {
 
 	public void registerDieta(Dieta dieta) {
 		DietaDAO.inserir(dieta);
+	}
+
+	public void registerRefeicao(Refeicao refeicao) {
+		RefeicaoDAO.inserir(refeicao);
 	}
 
 }

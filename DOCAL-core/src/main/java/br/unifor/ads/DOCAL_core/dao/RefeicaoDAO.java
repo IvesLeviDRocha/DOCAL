@@ -38,6 +38,11 @@ public class RefeicaoDAO {
 		return (Refeicao) em.getSingleResult(sql, nome);
 	}
 
+	public static List<Object> findByUserId(Integer usuario_id) {
+		String sql = "select id, nome, usuario_id, carboidratos, proteinas, gorduras from refeicao where usuario_id = ?";
+		return em.resultList(sql, usuario_id);
+	}
+
 	public static List<Object> buscarTodos() {
 		String sql = "select id, nome, usuario_id, carboidratos, proteinas, gorduras from refeicao";
 		return em.resultList(sql);

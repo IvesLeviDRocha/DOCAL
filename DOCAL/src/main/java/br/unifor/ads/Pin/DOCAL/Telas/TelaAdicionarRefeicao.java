@@ -39,6 +39,12 @@ public class TelaAdicionarRefeicao extends JPanel {
 	private TableRowSorter sorter;
 	private DefaultTableModel model;
 
+	private String[] colunas = { "Nome", "Carboidratos", "Proteinas",
+			"Gorduras" };
+	private Object[][] dados = { { "arroz com bife", "300g", "25g", "50g" },
+			{ "macarronada", "100g", "40g", "60g" },
+			{ "baião com frango e puré", "80g", "75g", "80g" } };
+
 	public TelaAdicionarRefeicao(ManagerAdicionarRefeicao manager) {
 		setBackground(new Color(255, 255, 255));
 
@@ -51,7 +57,7 @@ public class TelaAdicionarRefeicao extends JPanel {
 
 		JLabel lblAddRef = new JLabel("Adicionar Refeição");
 		lblAddRef.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 22));
-		lblAddRef.setBounds(176, 65, 183, 32);
+		lblAddRef.setBounds(176, 11, 183, 32);
 		add(lblAddRef);
 
 		JButton btnAdicionar = new JButton("Adicionar");
@@ -61,12 +67,12 @@ public class TelaAdicionarRefeicao extends JPanel {
 				btnAdicionarPressionado();
 			}
 		});
-		btnAdicionar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 12));
-		btnAdicionar.setBounds(29, 317, 104, 32);
+		btnAdicionar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		btnAdicionar.setBounds(409, 370, 110, 52);
 		add(btnAdicionar);
 
 		JButton btnCadastrarNova = new JButton(
-				"<html>Cadastra<br/> nova</html>");
+				"<html><center>Cadastrar<br/> nova</center></html>");
 		btnCadastrarNova.setBackground(Color.LIGHT_GRAY);
 		btnCadastrarNova.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -74,8 +80,8 @@ public class TelaAdicionarRefeicao extends JPanel {
 			}
 		});
 		btnCadastrarNova.setFont(new Font("Microsoft Sans Serif", Font.PLAIN,
-				12));
-		btnCadastrarNova.setBounds(277, 317, 104, 32);
+				16));
+		btnCadastrarNova.setBounds(277, 370, 110, 52);
 		add(btnCadastrarNova);
 
 		JButton btnCancelar = new JButton("Cancelar");
@@ -86,36 +92,36 @@ public class TelaAdicionarRefeicao extends JPanel {
 			}
 		});
 		btnCancelar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnCancelar.setBounds(404, 317, 99, 31);
+		btnCancelar.setBounds(22, 370, 110, 52);
 		add(btnCancelar);
 
-		JLabel lblSelecione = new JLabel(
-				"<html><B>Refeições já cadastradas</B></html>",
+		JLabel lblSelecione = new JLabel("Refeições já cadastradas",
 				SwingConstants.CENTER);
-		lblSelecione.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 11));
-		lblSelecione.setBounds(29, 175, 183, 23);
+		lblSelecione.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		lblSelecione.setBounds(22, 65, 193, 33);
 		add(lblSelecione);
 
-		JButton btnRemover = new JButton("<html>Remover<br/> da lista</html>");
+		JButton btnRemover = new JButton(
+				"<html><center>Remover<br/> da lista</center></html>");
 		btnRemover.setBackground(Color.LIGHT_GRAY);
 		btnRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnRemoverPressionado();
 			}
 		});
-		btnRemover.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 12));
-		btnRemover.setBounds(155, 317, 99, 32);
+		btnRemover.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		btnRemover.setBounds(155, 370, 110, 52);
 		add(btnRemover);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 211, 497, 76);
-
-		String[] colunas = { "Nome", "Carboidratos", "Proteinas", "Gorduras" };
-		Object[][] dados = { { "Arroz com bife", "300g", "25g", "50g" },
-				{ "Macarronada", "100g", "40g", "60g" },
-				{ "Baião com frango e puré", "80g", "75g", "80g" } };
+		scrollPane.setBounds(22, 109, 497, 250);
 
 		table = new JTable();
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		table.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 16));
+		table.setRowHeight(22);
+		table.setPreferredScrollableViewportSize(table.getSize());
+
 		model = new DefaultTableModel(dados, colunas);
 		table.setModel(model);
 		scrollPane.setViewportView(table);
@@ -123,12 +129,13 @@ public class TelaAdicionarRefeicao extends JPanel {
 		table.setRowSorter(sorter);
 		add(scrollPane);
 
-		JLabel lblPesquisa = new JLabel("<html><B>Pesquisa</B></html>",
-				SwingConstants.CENTER);
-		lblPesquisa.setBounds(305, 179, 54, 14);
+		JLabel lblPesquisa = new JLabel("Pesquisa:", SwingConstants.CENTER);
+		lblPesquisa.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		lblPesquisa.setBounds(278, 67, 81, 29);
 		add(lblPesquisa);
 
 		textField = new JTextField();
+		textField.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 16));
 		textField.setBackground(Color.WHITE);
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
@@ -136,7 +143,7 @@ public class TelaAdicionarRefeicao extends JPanel {
 				pesquisa();
 			}
 		});
-		textField.setBounds(369, 176, 150, 23);
+		textField.setBounds(369, 66, 150, 32);
 		textField.setColumns(10);
 		add(textField);
 
@@ -170,15 +177,16 @@ public class TelaAdicionarRefeicao extends JPanel {
 	}
 
 	private void pesquisa() {
-		String text = textField.getText().substring(0, 1).toUpperCase()
-				.concat(textField.getText().substring(1));
+		// String text = textField.getText().substring(0, 1).toUpperCase()
+		// .concat(textField.getText().substring(1));
+		String text = textField.getText();
 
-		if (text.length() == 0) {
-			sorter.setRowFilter(null);
-
-		} else {
-			sorter.setRowFilter(RowFilter.regexFilter(text));
-
-		}
+		// if (text.length() == 0) {
+		// sorter.setRowFilter(null);
+		//
+		// } else {
+		sorter.setRowFilter(RowFilter.regexFilter(text));
+		//
+		// }
 	}
 }

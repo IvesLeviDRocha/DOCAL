@@ -1,21 +1,23 @@
 package br.unifor.ads.Pin.DOCAL.Telas;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerCadastroRefeicao;
-
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
 
 /**
  * Esta classe e responsavel por manter os componentes relativos ao cadastro da
@@ -26,7 +28,7 @@ public class TelaCadastroRefeicao extends JPanel {
 	private static final long serialVersionUID = -214369656604544646L;
 
 	private ManagerCadastroRefeicao manager;
-	private JFormattedTextField formattedTextFieldNome;
+	private JTextField textFieldNome;
 	private JFormattedTextField formattedTextFieldCarb;
 	private JFormattedTextField formattedTextFieldProt;
 	private JFormattedTextField formattedTextFieldGord;
@@ -54,11 +56,10 @@ public class TelaCadastroRefeicao extends JPanel {
 		lblNome.setBounds(199, 112, 135, 20);
 		add(lblNome);
 
-		formattedTextFieldNome = new JFormattedTextField();
-		formattedTextFieldNome.setFont(new Font("Microsoft Sans Serif",
-				Font.PLAIN, 14));
-		formattedTextFieldNome.setBounds(132, 143, 268, 33);
-		add(formattedTextFieldNome);
+		textFieldNome = new JFormattedTextField();
+		textFieldNome.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
+		textFieldNome.setBounds(132, 143, 268, 33);
+		add(textFieldNome);
 
 		JLabel lblQuantidadeDeCarboidratos = new JLabel(
 				"<html><B>Carboidratos:</B></html>");
@@ -129,7 +130,15 @@ public class TelaCadastroRefeicao extends JPanel {
 	}
 
 	public void btnCadastrarPressionado() {
-		manager.btnCadastrarPressionado();
+		if (checkFieldsNotEmpty()) {
+			String nome = textFieldNome.getText();
+			String carb = formattedTextFieldCarb.getText();
+			String prot = formattedTextFieldProt.getText();
+			String gord = formattedTextFieldGord.getText();
+			manager.btnCadastrarPressionado(nome, carb, prot, gord);
+		} else {
+			JOptionPane.showMessageDialog(this, "Campos em branco!");
+		}
 	}
 
 	public void btnCancelarPressionado() {
@@ -137,10 +146,21 @@ public class TelaCadastroRefeicao extends JPanel {
 	}
 
 	public void limparFormularios() {
-		formattedTextFieldNome.setText("");
+		textFieldNome.setText("");
 		formattedTextFieldCarb.setText("");
 		formattedTextFieldProt.setText("");
 		formattedTextFieldGord.setText("");
+	}
+
+	public boolean checkFieldsNotEmpty() {
+		if (textFieldNome.getText().equals("")
+				|| formattedTextFieldCarb.getText().equals("")
+				|| formattedTextFieldProt.getText().equals("")
+				|| formattedTextFieldGord.getText().equals("")) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }

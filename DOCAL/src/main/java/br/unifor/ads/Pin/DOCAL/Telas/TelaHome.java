@@ -70,7 +70,7 @@ public class TelaHome extends JPanel {
 		});
 		btnAddRefeicao
 				.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnAddRefeicao.setBounds(332, 339, 178, 32);
+		btnAddRefeicao.setBounds(332, 339, 178, 45);
 		add(btnAddRefeicao);
 
 		JButton btnReset = new JButton("Reset");
@@ -81,7 +81,7 @@ public class TelaHome extends JPanel {
 			}
 		});
 		btnReset.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnReset.setBounds(192, 342, 103, 27);
+		btnReset.setBounds(192, 342, 103, 42);
 		add(btnReset);
 
 		JButton btnNovaDieta = new JButton("Nova Dieta");
@@ -92,7 +92,7 @@ public class TelaHome extends JPanel {
 			}
 		});
 		btnNovaDieta.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnNovaDieta.setBounds(31, 342, 127, 27);
+		btnNovaDieta.setBounds(31, 342, 127, 42);
 		add(btnNovaDieta);
 
 		table = new JTable();
