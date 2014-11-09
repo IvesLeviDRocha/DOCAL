@@ -81,11 +81,17 @@ public class Controller {
 	}
 
 	public void registerDieta(Dieta dieta) {
+		Dieta dietaAtual = DietaDAO.findByUsuarioId(loggedUser.getId());
+		DietaDAO.excluir(dietaAtual);
 		DietaDAO.inserir(dieta);
 	}
 
 	public void registerRefeicao(Refeicao refeicao) {
 		RefeicaoDAO.inserir(refeicao);
+	}
+	
+	public void removeRefeicao(Refeicao refeicao) {
+		RefeicaoDAO.excluir(refeicao);
 	}
 
 }

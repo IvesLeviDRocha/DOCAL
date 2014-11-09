@@ -102,7 +102,7 @@ public class TelaCadastroRefeicao extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnCadastrar.setBounds(94, 339, 119, 40);
+		btnCadastrar.setBounds(340, 340, 120, 42);
 		add(btnCadastrar);
 
 		JButton btnCancelar = new JButton("Cancelar");
@@ -113,7 +113,7 @@ public class TelaCadastroRefeicao extends JPanel {
 			}
 		});
 		btnCancelar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnCancelar.setBounds(338, 339, 119, 40);
+		btnCancelar.setBounds(100, 340, 120, 42);
 		add(btnCancelar);
 
 		JLabel foto = new JLabel("");

@@ -115,7 +115,7 @@ public class TelaCadastroDieta extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnCadastrar.setBounds(84, 378, 111, 39);
+		btnCadastrar.setBounds(340, 340, 120, 42);
 		add(btnCadastrar);
 
 		JButton btnCancelar = new JButton("Cancelar");
@@ -126,7 +126,7 @@ public class TelaCadastroDieta extends JPanel {
 			}
 		});
 		btnCancelar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnCancelar.setBounds(343, 378, 111, 39);
+		btnCancelar.setBounds(100, 340, 120, 42);
 		add(btnCancelar);
 
 		JLabel foto = new JLabel("");

@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,6 +26,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import br.unifor.ads.DOCAL_core.dao.RefeicaoDAO;
+import br.unifor.ads.DOCAL_core.entity.Refeicao;
+import br.unifor.ads.DOCAL_core.entity.Usuario;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerAdicionarRefeicao;
 
 /**
@@ -36,16 +42,24 @@ public class TelaAdicionarRefeicao extends JPanel {
 	private ManagerAdicionarRefeicao manager;
 	private JTable table;
 	private JTextField textField;
-	private TableRowSorter sorter;
+	private TableRowSorter<TableModel> sorter;
 	private DefaultTableModel model;
 
-	private String[] colunas = { "Nome", "Carboidratos", "Proteinas",
-			"Gorduras" };
-	private Object[][] dados = { { "arroz com bife", "300g", "25g", "50g" },
-			{ "macarronada", "100g", "40g", "60g" },
-			{ "baião com frango e puré", "80g", "75g", "80g" } };
+	private Vector<String> colunas;
+	private Vector<Vector<String>> dados;
+	private List<Refeicao> loadedRefeicoes;
 
 	public TelaAdicionarRefeicao(ManagerAdicionarRefeicao manager) {
+
+		colunas = new Vector<String>();
+		colunas.add("Nome");
+		colunas.add("Carboidratos");
+		colunas.add("Proteinas");
+		colunas.add("Gorduras");
+
+		dados = new Vector<Vector<String>>();
+		loadedRefeicoes = new ArrayList<Refeicao>();
+
 		setBackground(new Color(255, 255, 255));
 
 		this.manager = manager;
@@ -173,20 +187,38 @@ public class TelaAdicionarRefeicao extends JPanel {
 	}
 
 	public void btnRemoverPressionado() {
-		manager.btnRemoverPressionado();
+		int row = table.getSelectedRow();
+		Refeicao ref = loadedRefeicoes.get(row);
+		manager.btnRemoverPressionado(ref, row);
 	}
 
-	private void pesquisa() {
-		// String text = textField.getText().substring(0, 1).toUpperCase()
-		// .concat(textField.getText().substring(1));
-		String text = textField.getText();
+	public void removeRefeicaoFromTable(int row) {
+		loadedRefeicoes.remove(row);
+		dados.remove(row);
+		model.fireTableDataChanged();
+	}
 
-		// if (text.length() == 0) {
-		// sorter.setRowFilter(null);
-		//
-		// } else {
-		sorter.setRowFilter(RowFilter.regexFilter(text));
-		//
-		// }
+	public void pesquisa() {
+		String text = textField.getText();
+		sorter.setRowFilter(RowFilter.regexFilter(text, 0));
+	}
+
+	public void loadRefeicaoData(Usuario loggedUser) {
+		clearRefeicaoData();
+		List<Object> list = RefeicaoDAO.findByUserId(loggedUser.getId());
+		for (Object obj : list) {
+			Refeicao ref = (Refeicao) obj;
+			loadedRefeicoes.add(ref);
+			dados.add(ref.getRowData());
+		}
+	}
+	
+	private void clearRefeicaoData() {
+		dados.clear();
+		loadedRefeicoes.clear();
+	}
+	
+	public void limparForms() {
+		textField.setText("");
 	}
 }

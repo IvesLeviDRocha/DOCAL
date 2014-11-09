@@ -1,6 +1,7 @@
 package br.unifor.ads.DOCAL_core.entity;
 
 import java.io.Serializable;
+import java.util.Vector;
 
 public class Refeicao implements Serializable {
 
@@ -76,6 +77,15 @@ public class Refeicao implements Serializable {
 	public Float getCalorias() {
 		Float calorias = carboidratos * 4 + proteinas * 4 + gorduras * 9;
 		return calorias;
+	}
+
+	public Vector<String> getRowData() {
+		Vector<String> vector = new Vector<String>();
+		vector.add(nome);
+		vector.add(carboidratos + "g");
+		vector.add(proteinas + "g");
+		vector.add(gorduras + "g");
+		return vector;
 	}
 
 }

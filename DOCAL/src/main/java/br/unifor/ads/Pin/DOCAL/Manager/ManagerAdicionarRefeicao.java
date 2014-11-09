@@ -3,6 +3,7 @@ package br.unifor.ads.Pin.DOCAL.Manager;
 import javax.swing.JOptionPane;
 
 import br.unifor.ads.DOCAL.controller.Controller;
+import br.unifor.ads.DOCAL_core.entity.Refeicao;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaAdicionarRefeicao;
 
 /**
@@ -21,6 +22,9 @@ public class ManagerAdicionarRefeicao {
 	}
 
 	public TelaAdicionarRefeicao getTela() {
+		tela.loadRefeicaoData(controller.getLoggedUser());
+		tela.limparForms();
+		tela.pesquisa();
 		return tela;
 	}
 
@@ -38,10 +42,14 @@ public class ManagerAdicionarRefeicao {
 
 	}
 
-	public void btnRemoverPressionado() {
-		JOptionPane.showConfirmDialog(controller.getFrame(),
+	public void btnRemoverPressionado(Refeicao ref, Integer row) {
+		int op = JOptionPane.showConfirmDialog(controller.getFrame(),
 				"Deseja remover esta refeicao da lista?", "Remover",
 				JOptionPane.YES_NO_OPTION);
+		if (op == 0) {
+			controller.removeRefeicao(ref);
+			tela.removeRefeicaoFromTable(row);
+		}
 	}
 
 }

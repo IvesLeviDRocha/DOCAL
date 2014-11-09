@@ -58,68 +58,68 @@ public class TelaCadastroUsuario extends JPanel {
 		/* Criação da label do nome e o textFild do nome* */
 		JLabel lblNome = new JLabel("<html><B>Nome:</B></html>");
 		lblNome.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		lblNome.setBounds(61, 122, 49, 14);
+		lblNome.setBounds(70, 122, 49, 14);
 		add(lblNome);
 
 		textFieldNome = new JTextField();
 		textFieldNome.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		textFieldNome.setBounds(120, 115, 214, 28);
+		textFieldNome.setBounds(129, 115, 214, 28);
 		textFieldNome.setColumns(10);
 		add(textFieldNome);
 
 		/* Criação da label do login e o textFild do Login* */
 		JLabel lblLogin = new JLabel("<html><B>Login:</B></html>");
 		lblLogin.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		lblLogin.setBounds(61, 179, 39, 17);
+		lblLogin.setBounds(80, 179, 39, 17);
 		add(lblLogin);
 
 		textFieldLogin = new JTextField();
 		textFieldLogin
 				.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		textFieldLogin.setBounds(120, 173, 214, 28);
+		textFieldLogin.setBounds(129, 173, 214, 28);
 		textFieldLogin.setColumns(10);
 		add(textFieldLogin);
 
 		/* Criação da label do senha e o passwordFild do Senha* */
 		JLabel lblSenha = new JLabel("<html><B>Senha:</B></html>");
 		lblSenha.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		lblSenha.setBounds(51, 229, 49, 14);
+		lblSenha.setBounds(70, 229, 49, 14);
 		add(lblSenha);
 
 		passwordFieldSenha = new JPasswordField();
 		passwordFieldSenha.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		passwordFieldSenha.setBounds(120, 222, 214, 28);
+		passwordFieldSenha.setBounds(129, 222, 214, 28);
 		add(passwordFieldSenha);
 
 		/* Criação da label do confirmaSenha e o passwordFild do ConfimaSenha* */
 		JLabel lblConfirmeSenha = new JLabel(
-				"<html><B>Confirme<br/> senha:</B></html>");
+				"<html><B>Confirme senha:</B></html>");
 		lblConfirmeSenha.setFont(new Font("Microsoft Sans Serif", Font.PLAIN,
 				14));
-		lblConfirmeSenha.setBounds(19, 283, 81, 28);
+		lblConfirmeSenha.setBounds(0, 275, 120, 28);
 		add(lblConfirmeSenha);
 
 		passwordFieldConfSenha = new JPasswordField();
 		passwordFieldConfSenha.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		passwordFieldConfSenha.setBounds(120, 275, 214, 28);
+		passwordFieldConfSenha.setBounds(129, 275, 214, 28);
 		add(passwordFieldConfSenha);
 
 		/* Criação da label do peso e o textFild do Peso* */
 		JLabel lblPeso = new JLabel("<html><B>Peso:</B></html>");
 		lblPeso.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		lblPeso.setBounds(472, 121, 39, 17);
+		lblPeso.setBounds(364, 174, 39, 17);
 		add(lblPeso);
 
 		textFieldPeso = new JTextField();
 		textFieldPeso.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		textFieldPeso.setBounds(521, 115, 49, 28);
+		textFieldPeso.setBounds(413, 168, 49, 28);
 		textFieldPeso.setColumns(10);
 		add(textFieldPeso);
 
 		/* Criação da label do altura e o textFild do Altura* */
 		JLabel lblAltura = new JLabel("<html><B>Altura:</B></html>");
 		lblAltura.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		lblAltura.setBounds(344, 121, 50, 17);
+		lblAltura.setBounds(353, 121, 50, 17);
 		add(lblAltura);
 
 		try {
@@ -143,7 +143,7 @@ public class TelaCadastroUsuario extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnCadastrar.setBounds(51, 365, 114, 38);
+		btnCadastrar.setBounds(342, 365, 120, 40);
 		add(btnCadastrar);
 
 		/* Criação button de Limpa* */
@@ -155,7 +155,7 @@ public class TelaCadastroUsuario extends JPanel {
 				btnLimparPressionado();
 			}
 		});
-		btnLimpar.setBounds(224, 365, 114, 38);
+		btnLimpar.setBounds(192, 365, 120, 40);
 		add(btnLimpar);
 
 		/* Criação button de Cancela* */
@@ -167,7 +167,7 @@ public class TelaCadastroUsuario extends JPanel {
 				btnCancelarPressionado();
 			}
 		});
-		btnCancelar.setBounds(392, 365, 114, 38);
+		btnCancelar.setBounds(38, 365, 120, 40);
 		add(btnCancelar);
 
 		JLabel foto = new JLabel("");

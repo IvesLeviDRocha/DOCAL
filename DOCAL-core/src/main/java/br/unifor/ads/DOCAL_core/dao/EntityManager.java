@@ -16,7 +16,7 @@ public abstract class EntityManager {
 			pstm.execute();
 		} catch (SQLException e) {
 			System.out
-					.println("Não foi possível inserir o pais, tente novamente!");
+					.println("Não foi possível inserir os dados, tente novamente!");
 		} finally {
 			close(pstm);
 		}

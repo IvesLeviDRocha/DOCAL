@@ -84,7 +84,7 @@ public class TelaLogin extends JPanel {
 			}
 
 		});
-		btnEntrar.setBounds(101, 305, 127, 48);
+		btnEntrar.setBounds(247, 305, 120, 48);
 		add(btnEntrar);
 
 		// Label login (titulo da tela)
@@ -96,13 +96,14 @@ public class TelaLogin extends JPanel {
 
 		JLabel lblCadastreseAqui = new JLabel(
 				"<html><B>Cadastre-se aqui!</B></html>");
+		lblCadastreseAqui.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 16));
 		lblCadastreseAqui.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				lblCadastrarPressionado();
 			}
 		});
-		lblCadastreseAqui.setBounds(101, 256, 114, 14);
+		lblCadastreseAqui.setBounds(101, 256, 131, 22);
 		lblCadastreseAqui.setForeground(java.awt.Color.RED);
 		add(lblCadastreseAqui);
 
@@ -114,7 +115,7 @@ public class TelaLogin extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 20));
-		btnSair.setBounds(260, 305, 114, 48);
+		btnSair.setBounds(100, 305, 120, 48);
 		add(btnSair);
 
 		JLabel foto = new JLabel("");
