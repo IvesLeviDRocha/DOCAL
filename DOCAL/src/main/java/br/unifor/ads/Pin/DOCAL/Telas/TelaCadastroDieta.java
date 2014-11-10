@@ -48,7 +48,7 @@ public class TelaCadastroDieta extends JPanel {
 				SwingConstants.CENTER);
 		lblCadastroDeDieta.setFont(new Font("Microsoft Sans Serif", Font.PLAIN,
 				22));
-		lblCadastroDeDieta.setBounds(165, 22, 199, 33);
+		lblCadastroDeDieta.setBounds(164, 39, 199, 33);
 		add(lblCadastroDeDieta);
 		ImageIcon imagens = new ImageIcon(
 				TelaAdicionarRefeicao.class
@@ -56,55 +56,52 @@ public class TelaCadastroDieta extends JPanel {
 		Image imagem = imagens.getImage().getScaledInstance(540, 470,
 				Image.SCALE_SMOOTH);
 
-		JLabel lblNome = new JLabel("<html><B>Nome da dieta</B></html>",
+		JLabel lblNome = new JLabel("Nome da dieta:",
 				SwingConstants.CENTER);
-		lblNome.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		lblNome.setBounds(201, 94, 118, 14);
+		lblNome.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 16));
+		lblNome.setBounds(200, 100, 148, 33);
 		add(lblNome);
 
 		textFieldNome = new JTextField();
 		textFieldNome.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		textFieldNome.setBounds(143, 126, 244, 33);
+		textFieldNome.setBounds(132, 143, 268, 33);
 		add(textFieldNome);
 		textFieldNome.setColumns(10);
 
 		JLabel lblQuantidadeDeCarboidratos = new JLabel(
-				"<html><B>Carboidratos:</B></html>");
-		lblQuantidadeDeCarboidratos.setFont(new Font("Microsoft Sans Serif",
-				Font.PLAIN, 14));
-		lblQuantidadeDeCarboidratos.setBounds(0, 235, 107, 14);
+				"Carboidratos:");
+		lblQuantidadeDeCarboidratos.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		lblQuantidadeDeCarboidratos.setBounds(142, 196, 101, 20);
 		add(lblQuantidadeDeCarboidratos);
 
 		formattedTextFieldCarb = new JFormattedTextField();
 		formattedTextFieldCarb.setFont(new Font("Microsoft Sans Serif",
 				Font.PLAIN, 14));
-		formattedTextFieldCarb.setBounds(117, 228, 60, 29);
+		formattedTextFieldCarb.setBounds(253, 193, 60, 28);
 		add(formattedTextFieldCarb);
 
 		JLabel lblQuantidadeDeProteinas = new JLabel(
-				"<html><B>Proteinas:</B></html>");
-		lblQuantidadeDeProteinas.setFont(new Font("Microsoft Sans Serif",
-				Font.PLAIN, 14));
-		lblQuantidadeDeProteinas.setBounds(189, 235, 82, 14);
+				"Proteinas:");
+		lblQuantidadeDeProteinas.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		lblQuantidadeDeProteinas.setBounds(168, 238, 75, 14);
 		add(lblQuantidadeDeProteinas);
 
 		formattedTextFieldProt = new JFormattedTextField();
 		formattedTextFieldProt.setFont(new Font("Microsoft Sans Serif",
 				Font.PLAIN, 14));
-		formattedTextFieldProt.setBounds(281, 228, 60, 29);
+		formattedTextFieldProt.setBounds(253, 232, 60, 28);
 		add(formattedTextFieldProt);
 
 		JLabel lblQuantidadeDeGorduras = new JLabel(
-				"<html><B>Gorduras:</B></html>");
-		lblQuantidadeDeGorduras.setFont(new Font("Microsoft Sans Serif",
-				Font.PLAIN, 14));
-		lblQuantidadeDeGorduras.setBounds(356, 235, 82, 14);
+				"Gorduras:");
+		lblQuantidadeDeGorduras.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		lblQuantidadeDeGorduras.setBounds(168, 278, 75, 14);
 		add(lblQuantidadeDeGorduras);
 
 		formattedTextFieldGord = new JFormattedTextField();
 		formattedTextFieldGord.setFont(new Font("Microsoft Sans Serif",
 				Font.PLAIN, 14));
-		formattedTextFieldGord.setBounds(442, 228, 60, 29);
+		formattedTextFieldGord.setBounds(253, 271, 60, 28);
 		add(formattedTextFieldGord);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -115,7 +112,7 @@ public class TelaCadastroDieta extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnCadastrar.setBounds(340, 340, 120, 42);
+		btnCadastrar.setBounds(280, 340, 120, 42);
 		add(btnCadastrar);
 
 		JButton btnCancelar = new JButton("Cancelar");
@@ -126,7 +123,7 @@ public class TelaCadastroDieta extends JPanel {
 			}
 		});
 		btnCancelar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnCancelar.setBounds(100, 340, 120, 42);
+		btnCancelar.setBounds(130, 340, 120, 42);
 		add(btnCancelar);
 
 		JLabel foto = new JLabel("");

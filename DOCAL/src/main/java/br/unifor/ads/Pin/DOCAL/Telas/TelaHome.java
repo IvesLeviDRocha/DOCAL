@@ -22,7 +22,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import br.unifor.ads.DOCAL_core.entity.Dieta;
-import br.unifor.ads.DOCAL_core.entity.Usuario;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerHome;
 
 /**
@@ -41,10 +40,10 @@ public class TelaHome extends JPanel {
 	JLabel lblDieta;
 
 	private String[] colunas = { "", "Hoje", "Total" };
-	private String[][] dados = { { "Caboidratos", "Valor", "Valor" },
-			{ "Proteinas", "Valor", "Valor" },
-			{ "Gorduras", "Valor", "Valor" },
-			{ "Calorias Totais", "Valor", "Valor" } };
+	private String[][] dados = { { "Caboidratos", "0g", "0g" },
+			{ "Proteinas", "0g", "0g" },
+			{ "Gorduras", "0g", "0g" },
+			{ "Calorias Totais", "0g", "0g" } };
 
 	public TelaHome(ManagerHome manager) {
 		setBackground(Color.WHITE);
@@ -118,7 +117,7 @@ public class TelaHome extends JPanel {
 		javax.swing.table.TableColumn tc = table.getColumn("");
 		tc.setCellRenderer(letras);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(69, 150, 401, 104);
+		scrollPane.setBounds(69, 150, 401, 118);
 		scrollPane.setViewportView(table);
 		add(scrollPane);
 

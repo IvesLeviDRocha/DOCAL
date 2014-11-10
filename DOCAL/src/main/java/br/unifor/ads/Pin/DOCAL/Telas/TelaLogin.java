@@ -15,9 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerLogin;
+import java.awt.Color;
 
 /**
  * Esta classe e responsavel por manter os componentes relativos ao login do
@@ -33,6 +36,8 @@ public class TelaLogin extends JPanel {
 	private JPasswordField passwordFieldSenha;
 
 	public TelaLogin(ManagerLogin manager) {
+		setLookAndFeelToNimbus();
+		
 		setBackground(java.awt.Color.WHITE);
 
 		// Designa o manager recebido como proprio.
@@ -104,7 +109,7 @@ public class TelaLogin extends JPanel {
 			}
 		});
 		lblCadastreseAqui.setBounds(101, 256, 131, 22);
-		lblCadastreseAqui.setForeground(java.awt.Color.RED);
+		lblCadastreseAqui.setForeground(Color.BLUE);
 		add(lblCadastreseAqui);
 
 		JButton btnSair = new JButton("Sair");
@@ -147,5 +152,18 @@ public class TelaLogin extends JPanel {
 	public void limparFormularios() {
 		textFieldUsuario.setText("");
 		passwordFieldSenha.setText("");
+	}
+	
+	public void setLookAndFeelToNimbus() {
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

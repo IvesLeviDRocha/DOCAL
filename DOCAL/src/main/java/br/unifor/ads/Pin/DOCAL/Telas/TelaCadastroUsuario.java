@@ -56,8 +56,8 @@ public class TelaCadastroUsuario extends JPanel {
 		add(lblCadastroDeUsuario);
 
 		/* Criação da label do nome e o textFild do nome* */
-		JLabel lblNome = new JLabel("<html><B>Nome:</B></html>");
-		lblNome.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		lblNome.setBounds(70, 122, 49, 14);
 		add(lblNome);
 
@@ -68,9 +68,9 @@ public class TelaCadastroUsuario extends JPanel {
 		add(textFieldNome);
 
 		/* Criação da label do login e o textFild do Login* */
-		JLabel lblLogin = new JLabel("<html><B>Login:</B></html>");
-		lblLogin.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		lblLogin.setBounds(80, 179, 39, 17);
+		JLabel lblLogin = new JLabel("Login:");
+		lblLogin.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		lblLogin.setBounds(70, 179, 49, 17);
 		add(lblLogin);
 
 		textFieldLogin = new JTextField();
@@ -81,9 +81,9 @@ public class TelaCadastroUsuario extends JPanel {
 		add(textFieldLogin);
 
 		/* Criação da label do senha e o passwordFild do Senha* */
-		JLabel lblSenha = new JLabel("<html><B>Senha:</B></html>");
-		lblSenha.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		lblSenha.setBounds(70, 229, 49, 14);
+		JLabel lblSenha = new JLabel("Senha:");
+		lblSenha.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		lblSenha.setBounds(67, 229, 52, 14);
 		add(lblSenha);
 
 		passwordFieldSenha = new JPasswordField();
@@ -93,9 +93,8 @@ public class TelaCadastroUsuario extends JPanel {
 
 		/* Criação da label do confirmaSenha e o passwordFild do ConfimaSenha* */
 		JLabel lblConfirmeSenha = new JLabel(
-				"<html><B>Confirme senha:</B></html>");
-		lblConfirmeSenha.setFont(new Font("Microsoft Sans Serif", Font.PLAIN,
-				14));
+				"Confirme senha:");
+		lblConfirmeSenha.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		lblConfirmeSenha.setBounds(0, 275, 120, 28);
 		add(lblConfirmeSenha);
 
@@ -105,20 +104,20 @@ public class TelaCadastroUsuario extends JPanel {
 		add(passwordFieldConfSenha);
 
 		/* Criação da label do peso e o textFild do Peso* */
-		JLabel lblPeso = new JLabel("<html><B>Peso:</B></html>");
-		lblPeso.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		lblPeso.setBounds(364, 174, 39, 17);
+		JLabel lblPeso = new JLabel("Peso:");
+		lblPeso.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		lblPeso.setBounds(359, 179, 41, 17);
 		add(lblPeso);
 
 		textFieldPeso = new JTextField();
 		textFieldPeso.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		textFieldPeso.setBounds(413, 168, 49, 28);
+		textFieldPeso.setBounds(410, 173, 52, 28);
 		textFieldPeso.setColumns(10);
 		add(textFieldPeso);
 
 		/* Criação da label do altura e o textFild do Altura* */
-		JLabel lblAltura = new JLabel("<html><B>Altura:</B></html>");
-		lblAltura.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
+		JLabel lblAltura = new JLabel("Altura:");
+		lblAltura.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		lblAltura.setBounds(353, 121, 50, 17);
 		add(lblAltura);
 
