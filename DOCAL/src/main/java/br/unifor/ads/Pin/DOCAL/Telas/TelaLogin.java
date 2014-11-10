@@ -32,30 +32,79 @@ public class TelaLogin extends JPanel {
 
 	private ManagerLogin manager;
 
+	private JLabel lblUsuario;
+	private JLabel lblSenha;
+	private JLabel lblLogin;
+	private JLabel lblCadastro;
+	private JLabel background;
 	private JTextField textFieldUsuario;
 	private JPasswordField passwordFieldSenha;
+	private JButton btnEntrar;
+	private JButton btnSair;
 
 	public TelaLogin(ManagerLogin manager) {
-		setLookAndFeelToNimbus();
-		
-		setBackground(java.awt.Color.WHITE);
-
-		// Designa o manager recebido como proprio.
 		this.manager = manager;
+		initializeLayout();
+		initializeLabels();
+		initalizeFields();
+		initalizeButtons();
+		initalizeBackground();
+	}
 
-		// Setta tamanho, layout e borda.
+	public void initializeLayout() {
+		setLookAndFeelToNimbus();
 		setPreferredSize(new Dimension(486, 406));
 		setLayout(null);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
+	}
 
-		// Label de usuário
-		JLabel lblUsuario = new JLabel("Usuario");
+	public void setLookAndFeelToNimbus() {
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void initializeLabels() {
+		lblUsuario = new JLabel("Usuario");
 		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsuario.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 20));
 		lblUsuario.setBounds(192, 86, 89, 41);
 		add(lblUsuario);
 
-		// text field de usuário
+		lblSenha = new JLabel("Senha");
+		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSenha.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 20));
+		lblSenha.setBounds(193, 171, 75, 41);
+		add(lblSenha);
+
+		lblLogin = new JLabel("Login");
+		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogin.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 28));
+		lblLogin.setBounds(180, 11, 102, 64);
+		add(lblLogin);
+
+		lblCadastro = new JLabel("Cadastre-se aqui!");
+		lblCadastro.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 16));
+		lblCadastro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				lblCadastrarPressionado();
+			}
+		});
+		lblCadastro.setBounds(101, 256, 131, 22);
+		lblCadastro.setForeground(Color.BLUE);
+		add(lblCadastro);
+
+	}
+
+	public void initalizeFields() {
 		textFieldUsuario = new JTextField();
 		textFieldUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldUsuario.setFont(new Font("Microsoft Sans Serif", Font.PLAIN,
@@ -64,23 +113,16 @@ public class TelaLogin extends JPanel {
 		add(textFieldUsuario);
 		textFieldUsuario.setColumns(10);
 
-		// label de senha
-		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSenha.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 20));
-		lblSenha.setBounds(193, 171, 75, 41);
-		add(lblSenha);
-
-		// textfield de senha
 		passwordFieldSenha = new JPasswordField();
 		passwordFieldSenha.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordFieldSenha.setFont(new Font("Microsoft Sans Serif", Font.PLAIN,
 				16));
 		passwordFieldSenha.setBounds(101, 209, 273, 35);
 		add(passwordFieldSenha);
+	}
 
-		// botao entrar
-		JButton btnEntrar = new JButton("Entrar");
+	public void initalizeButtons() {
+		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBackground(java.awt.Color.LIGHT_GRAY);
 		btnEntrar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 20));
 		btnEntrar.addActionListener(new ActionListener() {
@@ -92,27 +134,7 @@ public class TelaLogin extends JPanel {
 		btnEntrar.setBounds(247, 305, 120, 48);
 		add(btnEntrar);
 
-		// Label login (titulo da tela)
-		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogin.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 28));
-		lblLogin.setBounds(180, 11, 102, 64);
-		add(lblLogin);
-
-		JLabel lblCadastreseAqui = new JLabel(
-				"<html><B>Cadastre-se aqui!</B></html>");
-		lblCadastreseAqui.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 16));
-		lblCadastreseAqui.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				lblCadastrarPressionado();
-			}
-		});
-		lblCadastreseAqui.setBounds(101, 256, 131, 22);
-		lblCadastreseAqui.setForeground(Color.BLUE);
-		add(lblCadastreseAqui);
-
-		JButton btnSair = new JButton("Sair");
+		btnSair = new JButton("Sair");
 		btnSair.setBackground(java.awt.Color.LIGHT_GRAY);
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -122,17 +144,20 @@ public class TelaLogin extends JPanel {
 		btnSair.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 20));
 		btnSair.setBounds(100, 305, 120, 48);
 		add(btnSair);
+	}
 
-		JLabel foto = new JLabel("");
-		foto.setHorizontalAlignment(SwingConstants.CENTER);
+	public void initalizeBackground() {
+		setBackground(java.awt.Color.WHITE);
+		background = new JLabel("");
+		background.setHorizontalAlignment(SwingConstants.CENTER);
 		ImageIcon imagens = new ImageIcon(
 				TelaAdicionarRefeicao.class
 						.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
 		Image imagem = imagens.getImage().getScaledInstance(486, 406,
 				Image.SCALE_SMOOTH);
-		foto.setIcon(new ImageIcon(imagem));
-		foto.setBounds(0, 0, 486, 406);
-		add(foto);
+		background.setIcon(new ImageIcon(imagem));
+		background.setBounds(0, 0, 486, 406);
+		add(background);
 	}
 
 	public void btnEntrarPressionado() {
@@ -149,21 +174,9 @@ public class TelaLogin extends JPanel {
 		manager.btnSairPressionado();
 	}
 
-	public void limparFormularios() {
+	public void clearFields() {
 		textFieldUsuario.setText("");
 		passwordFieldSenha.setText("");
 	}
-	
-	public void setLookAndFeelToNimbus() {
-		try {
-			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 }

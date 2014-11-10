@@ -28,7 +28,7 @@ public class ManagerLogin {
 	public void btnEntrarPressionado(String login, String senha) {
 		if (logUser(login, senha)) {
 			controller.showHome();
-			tela.limparFormularios();
+			tela.clearFields();
 		} else {
 			JOptionPane.showMessageDialog(tela, "Usuario ou senha incorretos");
 		}
@@ -36,7 +36,7 @@ public class ManagerLogin {
 
 	public void lblCadastrarPressionado() {
 		controller.showCadastroUsuario();
-		tela.limparFormularios();
+		tela.clearFields();
 	}
 
 	public void btnSairPressionado() {

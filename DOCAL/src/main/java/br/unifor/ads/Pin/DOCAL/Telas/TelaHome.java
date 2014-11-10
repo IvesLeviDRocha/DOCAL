@@ -34,34 +34,48 @@ public class TelaHome extends JPanel {
 
 	private ManagerHome manager;
 
+	private JLabel lblDieta;
+	private JLabel background;
+	private JButton btnAddRefeicao;
+	private JButton btnReset;
+	private JButton btnNovaDieta;
 	private JTable table;
-	DefaultTableModel model;
-	JMenu mnOlaUsuario;
-	JLabel lblDieta;
+	private DefaultTableModel model;
+	private JMenu mnOlaUsuario;
+	private JMenuBar menuBar;
+	private JMenuItem mntmEditar;
+	private JMenuItem mntmSair;
 
 	private String[] colunas = { "", "Hoje", "Total" };
 	private String[][] dados = { { "Caboidratos", "0g", "0g" },
-			{ "Proteinas", "0g", "0g" },
-			{ "Gorduras", "0g", "0g" },
+			{ "Proteinas", "0g", "0g" }, { "Gorduras", "0g", "0g" },
 			{ "Calorias Totais", "0g", "0g" } };
 
 	public TelaHome(ManagerHome manager) {
-		
-		setBackground(Color.WHITE);
-
 		this.manager = manager;
+		initializeLayout();
+		initializeLabels();
+		initializeButtons();
+		initalizeTable();
+		initalizeMenu();
+		initalizeBackground();
+	}
 
-		// Setta tamanho, layout e borda.
+	private void initializeLayout() {
 		setPreferredSize(new Dimension(540, 470));
 		setLayout(null);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
+	}
 
+	private void initializeLabels() {
 		lblDieta = new JLabel("Dieta: [Dieta]", SwingConstants.CENTER);
 		lblDieta.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 24));
 		lblDieta.setBounds(206, 73, 138, 37);
 		add(lblDieta);
+	}
 
-		JButton btnAddRefeicao = new JButton("Adicionar Refeição");
+	private void initializeButtons() {
+		btnAddRefeicao = new JButton("Adicionar Refeição");
 		btnAddRefeicao.setBackground(Color.LIGHT_GRAY);
 		btnAddRefeicao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -73,7 +87,7 @@ public class TelaHome extends JPanel {
 		btnAddRefeicao.setBounds(332, 339, 178, 45);
 		add(btnAddRefeicao);
 
-		JButton btnReset = new JButton("Reset");
+		btnReset = new JButton("Reset");
 		btnReset.setBackground(Color.LIGHT_GRAY);
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -84,7 +98,7 @@ public class TelaHome extends JPanel {
 		btnReset.setBounds(192, 342, 103, 42);
 		add(btnReset);
 
-		JButton btnNovaDieta = new JButton("Nova Dieta");
+		btnNovaDieta = new JButton("Nova Dieta");
 		btnNovaDieta.setBackground(Color.LIGHT_GRAY);
 		btnNovaDieta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -94,14 +108,15 @@ public class TelaHome extends JPanel {
 		btnNovaDieta.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
 		btnNovaDieta.setBounds(31, 342, 127, 42);
 		add(btnNovaDieta);
+	}
 
+	private void initalizeTable() {
 		table = new JTable();
 		table.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 16));
 		table.setRowHeight(22);
 		table.setPreferredScrollableViewportSize(table.getSize());
 
 		DefaultTableCellRenderer letras = new DefaultTableCellRenderer() {
-
 			private static final long serialVersionUID = -5834457900837802725L;
 
 			public void setValue(Object value) {
@@ -121,22 +136,25 @@ public class TelaHome extends JPanel {
 		scrollPane.setBounds(69, 150, 401, 118);
 		scrollPane.setViewportView(table);
 		add(scrollPane);
+	}
 
-		JMenuBar menuBar = new JMenuBar();
+	private void initalizeMenu() {
+		mnOlaUsuario = new JMenu("Olá [Usuário]");
+		mnOlaUsuario.setBounds(483, 11, 107, 22);
+
+		menuBar = new JMenuBar();
 		menuBar.setBackground(Color.LIGHT_GRAY);
 		menuBar.setBounds(424, 11, 97, 21);
 
-		mnOlaUsuario = new JMenu("<html><B>Olá [Usuário]</B></html>");
-		mnOlaUsuario.setBounds(483, 11, 107, 22);
-
-		JMenuItem mntmEditar = new JMenuItem("Editar");
+		mntmEditar = new JMenuItem("Editar");
 		mntmEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mnItemAtualizarDadosPressionado();
 			}
 		});
 		mntmEditar.setBounds(510, 10, 129, 22);
-		JMenuItem mntmSair = new JMenuItem("Sair");
+
+		mntmSair = new JMenuItem("Sair");
 		mntmSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mnItemSairPressionado();
@@ -146,20 +164,23 @@ public class TelaHome extends JPanel {
 
 		mnOlaUsuario.add(mntmEditar);
 		mnOlaUsuario.add(mntmSair);
+
 		menuBar.add(mnOlaUsuario);
 		add(menuBar);
+	}
 
-		JLabel foto = new JLabel("");
-		foto.setHorizontalAlignment(SwingConstants.CENTER);
+	private void initalizeBackground() {
+		setBackground(Color.WHITE);
+		background = new JLabel("");
+		background.setHorizontalAlignment(SwingConstants.CENTER);
 		ImageIcon imagens = new ImageIcon(
 				TelaAdicionarRefeicao.class
 						.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
 		Image imagem = imagens.getImage().getScaledInstance(540, 470,
 				Image.SCALE_SMOOTH);
-		foto.setIcon(new ImageIcon(imagem));
-		foto.setBounds(0, 0, 540, 470);
-		add(foto);
-
+		background.setIcon(new ImageIcon(imagem));
+		background.setBounds(0, 0, 540, 470);
+		add(background);
 	}
 
 	public void btnAddRefeicaoPressionado() {
@@ -209,13 +230,14 @@ public class TelaHome extends JPanel {
 		model.setDataVector(dados, colunas);
 		model.fireTableDataChanged();
 	}
-	
-	public void updateRefeicaoData(String carb, String prot, String gord, String cal) {
+
+	public void updateRefeicaoData(String carb, String prot, String gord,
+			String cal) {
 		dados[0][1] = carb;
 		dados[1][1] = prot;
 		dados[2][1] = gord;
 		dados[3][1] = cal;
 		refreshTable();
 	}
-	
+
 }

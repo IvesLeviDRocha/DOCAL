@@ -29,50 +29,72 @@ public class TelaCadastroDieta extends JPanel {
 
 	private ManagerCadastroDieta manager;
 
+	private JLabel lblCadastroDeDieta;
+	private JLabel lblNome;
+	private JLabel lblQuantidadeDeCarboidratos;
+	private JLabel lblQuantidadeDeProteinas;
+	private JLabel lblQuantidadeDeGorduras;
+	private JLabel background;
 	private JTextField textFieldNome;
 	private JFormattedTextField formattedTextFieldCarb;
 	private JFormattedTextField formattedTextFieldProt;
 	private JFormattedTextField formattedTextFieldGord;
+	private JButton btnCadastrar;
+	private JButton btnCancelar;
 
 	public TelaCadastroDieta(ManagerCadastroDieta manager) {
-		setBackground(Color.WHITE);
-
 		this.manager = manager;
+		initializeLayout();
+		initializeLabels();
+		initializeFields();
+		initializeButtons();
+		initializeBackground();
+	}
 
-		// Setta tamanho, layout e borda.
+	private void initializeLayout() {
 		setPreferredSize(new Dimension(540, 470));
 		setLayout(null);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
+	}
 
-		JLabel lblCadastroDeDieta = new JLabel("Cadastro de Dieta",
+	private void initializeLabels() {
+		lblCadastroDeDieta = new JLabel("Cadastro de Dieta",
 				SwingConstants.CENTER);
 		lblCadastroDeDieta.setFont(new Font("Microsoft Sans Serif", Font.PLAIN,
 				22));
 		lblCadastroDeDieta.setBounds(164, 39, 199, 33);
 		add(lblCadastroDeDieta);
-		ImageIcon imagens = new ImageIcon(
-				TelaAdicionarRefeicao.class
-						.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
-		Image imagem = imagens.getImage().getScaledInstance(540, 470,
-				Image.SCALE_SMOOTH);
 
-		JLabel lblNome = new JLabel("Nome da dieta:",
-				SwingConstants.CENTER);
+		lblNome = new JLabel("Nome da dieta:", SwingConstants.CENTER);
 		lblNome.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 16));
 		lblNome.setBounds(200, 100, 148, 33);
 		add(lblNome);
 
+		lblQuantidadeDeGorduras = new JLabel("Gorduras:");
+		lblQuantidadeDeGorduras.setFont(new Font("Microsoft Sans Serif",
+				Font.BOLD, 14));
+		lblQuantidadeDeGorduras.setBounds(168, 278, 75, 14);
+		add(lblQuantidadeDeGorduras);
+
+		lblQuantidadeDeCarboidratos = new JLabel("Carboidratos:");
+		lblQuantidadeDeCarboidratos.setFont(new Font("Microsoft Sans Serif",
+				Font.BOLD, 14));
+		lblQuantidadeDeCarboidratos.setBounds(142, 196, 101, 20);
+		add(lblQuantidadeDeCarboidratos);
+
+		lblQuantidadeDeProteinas = new JLabel("Proteinas:");
+		lblQuantidadeDeProteinas.setFont(new Font("Microsoft Sans Serif",
+				Font.BOLD, 14));
+		lblQuantidadeDeProteinas.setBounds(168, 238, 75, 14);
+		add(lblQuantidadeDeProteinas);
+	}
+
+	private void initializeFields() {
 		textFieldNome = new JTextField();
 		textFieldNome.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
 		textFieldNome.setBounds(132, 143, 268, 33);
 		add(textFieldNome);
 		textFieldNome.setColumns(10);
-
-		JLabel lblQuantidadeDeCarboidratos = new JLabel(
-				"Carboidratos:");
-		lblQuantidadeDeCarboidratos.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		lblQuantidadeDeCarboidratos.setBounds(142, 196, 101, 20);
-		add(lblQuantidadeDeCarboidratos);
 
 		formattedTextFieldCarb = new JFormattedTextField();
 		formattedTextFieldCarb.setFont(new Font("Microsoft Sans Serif",
@@ -80,31 +102,21 @@ public class TelaCadastroDieta extends JPanel {
 		formattedTextFieldCarb.setBounds(253, 193, 60, 28);
 		add(formattedTextFieldCarb);
 
-		JLabel lblQuantidadeDeProteinas = new JLabel(
-				"Proteinas:");
-		lblQuantidadeDeProteinas.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		lblQuantidadeDeProteinas.setBounds(168, 238, 75, 14);
-		add(lblQuantidadeDeProteinas);
-
 		formattedTextFieldProt = new JFormattedTextField();
 		formattedTextFieldProt.setFont(new Font("Microsoft Sans Serif",
 				Font.PLAIN, 14));
 		formattedTextFieldProt.setBounds(253, 232, 60, 28);
 		add(formattedTextFieldProt);
 
-		JLabel lblQuantidadeDeGorduras = new JLabel(
-				"Gorduras:");
-		lblQuantidadeDeGorduras.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		lblQuantidadeDeGorduras.setBounds(168, 278, 75, 14);
-		add(lblQuantidadeDeGorduras);
-
 		formattedTextFieldGord = new JFormattedTextField();
 		formattedTextFieldGord.setFont(new Font("Microsoft Sans Serif",
 				Font.PLAIN, 14));
 		formattedTextFieldGord.setBounds(253, 271, 60, 28);
 		add(formattedTextFieldGord);
+	}
 
-		JButton btnCadastrar = new JButton("Cadastrar");
+	private void initializeButtons() {
+		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBackground(Color.LIGHT_GRAY);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -115,7 +127,7 @@ public class TelaCadastroDieta extends JPanel {
 		btnCadastrar.setBounds(280, 340, 120, 42);
 		add(btnCadastrar);
 
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBackground(Color.LIGHT_GRAY);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -125,13 +137,20 @@ public class TelaCadastroDieta extends JPanel {
 		btnCancelar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
 		btnCancelar.setBounds(130, 340, 120, 42);
 		add(btnCancelar);
+	}
 
-		JLabel foto = new JLabel("");
-		foto.setHorizontalAlignment(SwingConstants.CENTER);
-		foto.setIcon(new ImageIcon(imagem));
-		foto.setBounds(0, 0, 540, 470);
-		add(foto);
-
+	private void initializeBackground() {
+		setBackground(Color.WHITE);
+		background = new JLabel("");
+		background.setHorizontalAlignment(SwingConstants.CENTER);
+		ImageIcon imagens = new ImageIcon(
+				TelaAdicionarRefeicao.class
+						.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
+		Image imagem = imagens.getImage().getScaledInstance(540, 470,
+				Image.SCALE_SMOOTH);
+		background.setIcon(new ImageIcon(imagem));
+		background.setBounds(0, 0, 540, 470);
+		add(background);
 	}
 
 	public void btnCadastrarPressionado() {

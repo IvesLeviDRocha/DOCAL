@@ -31,47 +31,84 @@ public class TelaCadastroUsuario extends JPanel {
 
 	private ManagerCadastroUsuario manager;
 
+	private JLabel lblCadastroDeUsuario;
+	private JLabel lblNome;
+	private JLabel lblLogin;
+	private JLabel lblSenha;
+	private JLabel lblConfirmeSenha;
+	private JLabel lblPeso;
+	private JLabel lblAltura;
+	private JLabel background;
 	private JTextField textFieldNome;
 	private JTextField textFieldLogin;
 	private JPasswordField passwordFieldSenha;
 	private JPasswordField passwordFieldConfSenha;
 	private JTextField textFieldPeso;
 	private JFormattedTextField textFieldAltura;
+	private JButton btnCadastrar;
+	private JButton btnLimpar;
+	private JButton btnCancelar;
 
 	public TelaCadastroUsuario(ManagerCadastroUsuario manager) {
-		setBackground(Color.WHITE);
 		this.manager = manager;
+		initializeLayout();
+		initializeLabels();
+		initializeFields();
+		initializeButtons();
+		initializeBackground();
+	}
 
+	private void initializeLayout() {
 		setPreferredSize(new Dimension(580, 479));
-
 		setLayout(null);
-
 		setBorder(new EmptyBorder(5, 5, 5, 5));
+	}
 
-		/* Criação da label do titulo da tela* */
-		JLabel lblCadastroDeUsuario = new JLabel("Cadastro de Usuario");
+	private void initializeLabels() {
+		lblCadastroDeUsuario = new JLabel("Cadastro de Usuario");
 		lblCadastroDeUsuario.setFont(new Font("Microsoft Sans Serif",
 				Font.PLAIN, 22));
 		lblCadastroDeUsuario.setBounds(187, 8, 207, 56);
 		add(lblCadastroDeUsuario);
 
-		/* Criação da label do nome e o textFild do nome* */
-		JLabel lblNome = new JLabel("Nome:");
+		lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		lblNome.setBounds(70, 122, 49, 14);
 		add(lblNome);
 
+		lblAltura = new JLabel("Altura:");
+		lblAltura.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		lblAltura.setBounds(353, 121, 50, 17);
+		add(lblAltura);
+
+		lblLogin = new JLabel("Login:");
+		lblLogin.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		lblLogin.setBounds(70, 179, 49, 17);
+		add(lblLogin);
+
+		lblSenha = new JLabel("Senha:");
+		lblSenha.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		lblSenha.setBounds(67, 229, 52, 14);
+		add(lblSenha);
+
+		lblConfirmeSenha = new JLabel("Confirme senha:");
+		lblConfirmeSenha
+				.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		lblConfirmeSenha.setBounds(0, 275, 120, 28);
+		add(lblConfirmeSenha);
+
+		lblPeso = new JLabel("Peso:");
+		lblPeso.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		lblPeso.setBounds(359, 179, 41, 17);
+		add(lblPeso);
+	}
+
+	private void initializeFields() {
 		textFieldNome = new JTextField();
 		textFieldNome.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
 		textFieldNome.setBounds(129, 115, 214, 28);
 		textFieldNome.setColumns(10);
 		add(textFieldNome);
-
-		/* Criação da label do login e o textFild do Login* */
-		JLabel lblLogin = new JLabel("Login:");
-		lblLogin.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		lblLogin.setBounds(70, 179, 49, 17);
-		add(lblLogin);
 
 		textFieldLogin = new JTextField();
 		textFieldLogin
@@ -80,46 +117,21 @@ public class TelaCadastroUsuario extends JPanel {
 		textFieldLogin.setColumns(10);
 		add(textFieldLogin);
 
-		/* Criação da label do senha e o passwordFild do Senha* */
-		JLabel lblSenha = new JLabel("Senha:");
-		lblSenha.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		lblSenha.setBounds(67, 229, 52, 14);
-		add(lblSenha);
-
 		passwordFieldSenha = new JPasswordField();
 		passwordFieldSenha.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		passwordFieldSenha.setBounds(129, 222, 214, 28);
 		add(passwordFieldSenha);
-
-		/* Criação da label do confirmaSenha e o passwordFild do ConfimaSenha* */
-		JLabel lblConfirmeSenha = new JLabel(
-				"Confirme senha:");
-		lblConfirmeSenha.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		lblConfirmeSenha.setBounds(0, 275, 120, 28);
-		add(lblConfirmeSenha);
 
 		passwordFieldConfSenha = new JPasswordField();
 		passwordFieldConfSenha.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		passwordFieldConfSenha.setBounds(129, 275, 214, 28);
 		add(passwordFieldConfSenha);
 
-		/* Criação da label do peso e o textFild do Peso* */
-		JLabel lblPeso = new JLabel("Peso:");
-		lblPeso.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		lblPeso.setBounds(359, 179, 41, 17);
-		add(lblPeso);
-
 		textFieldPeso = new JTextField();
 		textFieldPeso.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
 		textFieldPeso.setBounds(410, 173, 52, 28);
 		textFieldPeso.setColumns(10);
 		add(textFieldPeso);
-
-		/* Criação da label do altura e o textFild do Altura* */
-		JLabel lblAltura = new JLabel("Altura:");
-		lblAltura.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		lblAltura.setBounds(353, 121, 50, 17);
-		add(lblAltura);
 
 		try {
 			MaskFormatter altura = new MaskFormatter("#.##");
@@ -132,9 +144,10 @@ public class TelaCadastroUsuario extends JPanel {
 			JOptionPane.showMessageDialog(null, "Altura invalida!");
 		}
 		add(textFieldAltura);
+	}
 
-		/* Criação button de Cadastrar* */
-		JButton btnCadastrar = new JButton("Cadastrar");
+	private void initializeButtons() {
+		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBackground(Color.LIGHT_GRAY);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -145,8 +158,7 @@ public class TelaCadastroUsuario extends JPanel {
 		btnCadastrar.setBounds(342, 365, 120, 40);
 		add(btnCadastrar);
 
-		/* Criação button de Limpa* */
-		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar = new JButton("Limpar");
 		btnLimpar.setBackground(Color.LIGHT_GRAY);
 		btnLimpar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
 		btnLimpar.addActionListener(new ActionListener() {
@@ -157,8 +169,7 @@ public class TelaCadastroUsuario extends JPanel {
 		btnLimpar.setBounds(192, 365, 120, 40);
 		add(btnLimpar);
 
-		/* Criação button de Cancela* */
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBackground(Color.LIGHT_GRAY);
 		btnCancelar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
 		btnCancelar.addActionListener(new ActionListener() {
@@ -168,18 +179,20 @@ public class TelaCadastroUsuario extends JPanel {
 		});
 		btnCancelar.setBounds(38, 365, 120, 40);
 		add(btnCancelar);
+	}
 
-		JLabel foto = new JLabel("");
-		foto.setHorizontalAlignment(SwingConstants.CENTER);
+	private void initializeBackground() {
+		setBackground(Color.WHITE);
+		background = new JLabel("");
+		background.setHorizontalAlignment(SwingConstants.CENTER);
 		ImageIcon imagens = new ImageIcon(
 				TelaAdicionarRefeicao.class
 						.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
 		Image imagem = imagens.getImage().getScaledInstance(540, 470,
 				Image.SCALE_SMOOTH);
-		foto.setIcon(new ImageIcon(imagem));
-		foto.setBounds(0, 0, 540, 470);
-		add(foto);
-
+		background.setIcon(new ImageIcon(imagem));
+		background.setBounds(0, 0, 540, 470);
+		add(background);
 	}
 
 	public void btnCancelarPressionado() {

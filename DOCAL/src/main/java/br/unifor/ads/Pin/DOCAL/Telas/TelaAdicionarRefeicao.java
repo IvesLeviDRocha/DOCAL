@@ -40,8 +40,19 @@ public class TelaAdicionarRefeicao extends JPanel {
 	private static final long serialVersionUID = 3679713584612256623L;
 
 	private ManagerAdicionarRefeicao manager;
+
+	private JLabel lblAddRef;
+	private JLabel lblSelecione;
+	private JLabel lblPesquisa;
+	private JLabel background;
+	private JTextField textFieldPesquisa;
+	private JButton btnAdicionar;
+	private JButton btnCadastrarNova;
+	private JButton btnCancelar;
+	private JButton btnRemover;
+
+	private JScrollPane scrollPane;
 	private JTable table;
-	private JTextField textField;
 	private TableRowSorter<TableModel> sorter;
 	private DefaultTableModel model;
 
@@ -50,31 +61,69 @@ public class TelaAdicionarRefeicao extends JPanel {
 	private List<Refeicao> loadedRefeicoes;
 
 	public TelaAdicionarRefeicao(ManagerAdicionarRefeicao manager) {
-
-		colunas = new Vector<String>();
-		colunas.add("Nome");
-		colunas.add("Carboidratos");
-		colunas.add("Proteinas");
-		colunas.add("Gorduras");
-
-		dados = new Vector<Vector<String>>();
-		loadedRefeicoes = new ArrayList<Refeicao>();
-
-		setBackground(new Color(255, 255, 255));
-
 		this.manager = manager;
+		initializeLayout();
+		initializeLabels();
+		initializeFields();
+		initializeButtons();
+		initializeTable();
+		initializeBackground();
+	}
 
-		// Setta tamanho, layout e borda.
+	private void initializeLayout() {
 		setPreferredSize(new Dimension(540, 470));
 		setLayout(null);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
+	}
 
-		JLabel lblAddRef = new JLabel("Adicionar Refeição");
+	private void initializeLabels() {
+		lblAddRef = new JLabel("Adicionar Refeição");
 		lblAddRef.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 22));
 		lblAddRef.setBounds(176, 11, 183, 32);
 		add(lblAddRef);
 
-		JButton btnAdicionar = new JButton("Adicionar");
+		lblPesquisa = new JLabel("Pesquisa:", SwingConstants.CENTER);
+		lblPesquisa.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		lblPesquisa.setBounds(278, 67, 81, 29);
+		add(lblPesquisa);
+
+		lblSelecione = new JLabel("Refeições já cadastradas",
+				SwingConstants.CENTER);
+		lblSelecione.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		lblSelecione.setBounds(22, 65, 193, 33);
+		add(lblSelecione);
+	}
+
+	private void initializeFields() {
+		textFieldPesquisa = new JTextField();
+		textFieldPesquisa.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN,
+				16));
+		textFieldPesquisa.setBackground(Color.WHITE);
+		textFieldPesquisa.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				pesquisa();
+			}
+		});
+		textFieldPesquisa.setBounds(369, 66, 150, 32);
+		textFieldPesquisa.setColumns(10);
+		add(textFieldPesquisa);
+	}
+
+	private void initializeButtons() {
+		btnRemover = new JButton(
+				"<html><center>Remover<br/> da lista</center></html>");
+		btnRemover.setBackground(Color.LIGHT_GRAY);
+		btnRemover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnRemoverPressionado();
+			}
+		});
+		btnRemover.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		btnRemover.setBounds(155, 370, 110, 52);
+		add(btnRemover);
+
+		btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.setBackground(Color.LIGHT_GRAY);
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -85,7 +134,7 @@ public class TelaAdicionarRefeicao extends JPanel {
 		btnAdicionar.setBounds(409, 370, 110, 52);
 		add(btnAdicionar);
 
-		JButton btnCadastrarNova = new JButton(
+		btnCadastrarNova = new JButton(
 				"<html><center>Cadastrar<br/> nova</center></html>");
 		btnCadastrarNova.setBackground(Color.LIGHT_GRAY);
 		btnCadastrarNova.addActionListener(new ActionListener() {
@@ -98,7 +147,7 @@ public class TelaAdicionarRefeicao extends JPanel {
 		btnCadastrarNova.setBounds(277, 370, 110, 52);
 		add(btnCadastrarNova);
 
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBackground(Color.LIGHT_GRAY);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -108,26 +157,18 @@ public class TelaAdicionarRefeicao extends JPanel {
 		btnCancelar.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
 		btnCancelar.setBounds(22, 370, 110, 52);
 		add(btnCancelar);
+	}
 
-		JLabel lblSelecione = new JLabel("Refeições já cadastradas",
-				SwingConstants.CENTER);
-		lblSelecione.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		lblSelecione.setBounds(22, 65, 193, 33);
-		add(lblSelecione);
+	private void initializeTable() {
+		colunas = new Vector<String>();
+		colunas.add("Nome");
+		colunas.add("Carboidratos");
+		colunas.add("Proteinas");
+		colunas.add("Gorduras");
+		dados = new Vector<Vector<String>>();
+		loadedRefeicoes = new ArrayList<Refeicao>();
 
-		JButton btnRemover = new JButton(
-				"<html><center>Remover<br/> da lista</center></html>");
-		btnRemover.setBackground(Color.LIGHT_GRAY);
-		btnRemover.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnRemoverPressionado();
-			}
-		});
-		btnRemover.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		btnRemover.setBounds(155, 370, 110, 52);
-		add(btnRemover);
-
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(22, 109, 497, 250);
 
 		table = new JTable();
@@ -142,36 +183,20 @@ public class TelaAdicionarRefeicao extends JPanel {
 		sorter = new TableRowSorter<TableModel>(model);
 		table.setRowSorter(sorter);
 		add(scrollPane);
+	}
 
-		JLabel lblPesquisa = new JLabel("Pesquisa:", SwingConstants.CENTER);
-		lblPesquisa.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		lblPesquisa.setBounds(278, 67, 81, 29);
-		add(lblPesquisa);
-
-		textField = new JTextField();
-		textField.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 16));
-		textField.setBackground(Color.WHITE);
-		textField.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				pesquisa();
-			}
-		});
-		textField.setBounds(369, 66, 150, 32);
-		textField.setColumns(10);
-		add(textField);
-
-		JLabel foto = new JLabel("");
-		foto.setHorizontalAlignment(SwingConstants.CENTER);
+	private void initializeBackground() {
+		setBackground(Color.WHITE);
+		background = new JLabel("");
+		background.setHorizontalAlignment(SwingConstants.CENTER);
 		ImageIcon imagens = new ImageIcon(
 				TelaAdicionarRefeicao.class
 						.getResource("/br/unifor/ads/Pin/DOCAL/Imagem/plano de fundo.png"));
 		Image imagem = imagens.getImage().getScaledInstance(540, 470,
 				Image.SCALE_SMOOTH);
-		foto.setIcon(new ImageIcon(imagem));
-		foto.setBounds(0, 0, 540, 470);
-		add(foto);
-
+		background.setIcon(new ImageIcon(imagem));
+		background.setBounds(0, 0, 540, 470);
+		add(background);
 	}
 
 	public void btnAdicionarPressionado() {
@@ -201,7 +226,7 @@ public class TelaAdicionarRefeicao extends JPanel {
 	}
 
 	public void pesquisa() {
-		String text = textField.getText();
+		String text = textFieldPesquisa.getText();
 		sorter.setRowFilter(RowFilter.regexFilter(text, 0));
 	}
 
@@ -221,6 +246,6 @@ public class TelaAdicionarRefeicao extends JPanel {
 	}
 
 	public void limparForms() {
-		textField.setText("");
+		textFieldPesquisa.setText("");
 	}
 }
