@@ -57,4 +57,10 @@ public class UsuarioDAO {
 		em.execute(sql, usuario.getId());
 	}
 
+	public static void updateAlturaAndPeso(Usuario user, Float altura,
+			Float peso) {
+		String sql = "update usuario set altura = ?, peso = ? where id = ?";
+		em.execute(sql, altura, peso, user.getId());
+	}
+
 }

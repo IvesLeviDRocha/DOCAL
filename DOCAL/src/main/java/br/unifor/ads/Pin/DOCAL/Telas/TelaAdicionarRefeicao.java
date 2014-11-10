@@ -175,7 +175,9 @@ public class TelaAdicionarRefeicao extends JPanel {
 	}
 
 	public void btnAdicionarPressionado() {
-		manager.btnAdicionarPressionado();
+		int row = table.getSelectedRow();
+		Refeicao ref = loadedRefeicoes.get(row);
+		manager.btnAdicionarPressionado(ref);
 	}
 
 	public void btnCadastrarNovaPressionado() {
@@ -212,12 +214,12 @@ public class TelaAdicionarRefeicao extends JPanel {
 			dados.add(ref.getRowData());
 		}
 	}
-	
+
 	private void clearRefeicaoData() {
 		dados.clear();
 		loadedRefeicoes.clear();
 	}
-	
+
 	public void limparForms() {
 		textField.setText("");
 	}

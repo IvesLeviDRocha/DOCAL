@@ -46,6 +46,7 @@ public class TelaHome extends JPanel {
 			{ "Calorias Totais", "0g", "0g" } };
 
 	public TelaHome(ManagerHome manager) {
+		
 		setBackground(Color.WHITE);
 
 		this.manager = manager;
@@ -208,4 +209,13 @@ public class TelaHome extends JPanel {
 		model.setDataVector(dados, colunas);
 		model.fireTableDataChanged();
 	}
+	
+	public void updateRefeicaoData(String carb, String prot, String gord, String cal) {
+		dados[0][1] = carb;
+		dados[1][1] = prot;
+		dados[2][1] = gord;
+		dados[3][1] = cal;
+		refreshTable();
+	}
+	
 }

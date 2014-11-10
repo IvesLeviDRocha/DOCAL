@@ -89,9 +89,17 @@ public class Controller {
 	public void registerRefeicao(Refeicao refeicao) {
 		RefeicaoDAO.inserir(refeicao);
 	}
-	
+
 	public void removeRefeicao(Refeicao refeicao) {
 		RefeicaoDAO.excluir(refeicao);
+	}
+
+	public void addRefeicao(Refeicao ref) {
+		managerHome.addRefeicao(ref);
+	}
+
+	public void updateAlturaAndPeso(Float altura, Float peso) {
+		UsuarioDAO.updateAlturaAndPeso(loggedUser, altura, peso);
 	}
 
 }

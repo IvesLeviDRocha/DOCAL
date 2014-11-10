@@ -28,7 +28,8 @@ public class ManagerAdicionarRefeicao {
 		return tela;
 	}
 
-	public void btnAdicionarPressionado() {
+	public void btnAdicionarPressionado(Refeicao ref) {
+		controller.addRefeicao(ref);
 		controller.showHome();
 	}
 
