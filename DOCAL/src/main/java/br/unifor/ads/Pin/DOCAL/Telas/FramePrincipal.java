@@ -11,7 +11,7 @@ public class FramePrincipal extends JFrame {
 	private static final long serialVersionUID = 3577900688565338673L;
 
 	public FramePrincipal(JPanel startingScreen) {
-		setTitle("DietOC");
+		setTitle("DOCAL");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(startingScreen);
 		pack();

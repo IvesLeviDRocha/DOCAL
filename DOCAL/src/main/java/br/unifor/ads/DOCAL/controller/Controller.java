@@ -13,7 +13,11 @@ import br.unifor.ads.Pin.DOCAL.Manager.ManagerCadastroUsuario;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerHome;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerLogin;
 import br.unifor.ads.Pin.DOCAL.Telas.FramePrincipal;
+import br.unifor.ads.Pin.DOCAL.Telas.PopUpper;
 
+/**
+ * Esta classe e responsavel por um bocado de coisa
+ */
 public class Controller {
 
 	private Usuario loggedUser;
@@ -34,6 +38,7 @@ public class Controller {
 		managerCadRef = new ManagerCadastroRefeicao(this);
 		managerAddRef = new ManagerAdicionarRefeicao(this);
 		frame = new FramePrincipal(managerLogin.getTela());
+		PopUpper.setFrame(frame);
 	}
 
 	public void setLoggedUser(Usuario user) {
@@ -76,8 +81,15 @@ public class Controller {
 		return frame;
 	}
 
-	public void registerUsuario(Usuario user) {
-		UsuarioDAO.inserir(user);
+	public boolean registerUsuario(Usuario user) {
+		Integer id = user.getId();
+		Usuario existente = UsuarioDAO.findById(id);
+		if (existente != null) {
+			return false;
+		} else {
+			UsuarioDAO.inserir(user);
+			return true;
+		}
 	}
 
 	public void registerDieta(Dieta dieta) {

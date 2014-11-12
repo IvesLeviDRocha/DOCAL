@@ -10,6 +10,7 @@ import br.unifor.ads.DOCAL_core.dao.DietaDAO;
 import br.unifor.ads.DOCAL_core.entity.Dieta;
 import br.unifor.ads.DOCAL_core.entity.Refeicao;
 import br.unifor.ads.DOCAL_core.entity.Usuario;
+import br.unifor.ads.Pin.DOCAL.Telas.PopUpper;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaHome;
 
 /**
@@ -37,8 +38,7 @@ public class ManagerHome {
 		Usuario loggedUser = controller.getLoggedUser();
 		Dieta userDiet = DietaDAO.findByUsuarioId(loggedUser.getId());
 		if (userDiet == null) {
-			JOptionPane.showMessageDialog(tela,
-					"Você não possui nenhuma dieta cadastrada.");
+			PopUpper.show("Você não possui nenhuma dieta cadastrada.");
 			tela.updateUserName(loggedUser.getNome());
 		} else {
 			tela.updateUserData(loggedUser.getNome(), userDiet);
@@ -53,10 +53,7 @@ public class ManagerHome {
 	}
 
 	public void btnResetPressionado() {
-		int op = JOptionPane.showConfirmDialog(tela,
-				"Deseja resetar a contagem atual?", "Reset",
-				JOptionPane.YES_NO_OPTION);
-		if (op == 0) {
+		if (PopUpper.confirm("Deseja resetar a contagem atual?")) {
 			clearRefeicoes();
 		}
 	}
@@ -66,14 +63,9 @@ public class ManagerHome {
 	}
 
 	public void btnSairPressionado() {
-		int op = JOptionPane.showConfirmDialog(tela, "Sair?", "Sair",
-				JOptionPane.YES_NO_OPTION);
-		switch (op) {
-		case 0:
+		if(PopUpper.confirm("Deseja sair?")) {
 			controller.showLogin();
-			break;
-		default:
-			break;
+			controller.setLoggedUser(null);
 		}
 	}
 

@@ -1,9 +1,8 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
-import javax.swing.JOptionPane;
-
 import br.unifor.ads.DOCAL.controller.Controller;
 import br.unifor.ads.DOCAL_core.entity.Refeicao;
+import br.unifor.ads.Pin.DOCAL.Telas.PopUpper;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaAdicionarRefeicao;
 
 /**
@@ -18,7 +17,6 @@ public class ManagerAdicionarRefeicao {
 	public ManagerAdicionarRefeicao(Controller controller) {
 		this.controller = controller;
 		this.tela = new TelaAdicionarRefeicao(this);
-
 	}
 
 	public TelaAdicionarRefeicao getTela() {
@@ -35,19 +33,14 @@ public class ManagerAdicionarRefeicao {
 
 	public void btnCadastrarNovaPressionado() {
 		controller.showCadastroRefeicao();
-
 	}
 
 	public void btnCancelarPressionado() {
 		controller.showHome();
-
 	}
 
 	public void btnRemoverPressionado(Refeicao ref, Integer row) {
-		int op = JOptionPane.showConfirmDialog(controller.getFrame(),
-				"Deseja remover esta refeicao da lista?", "Remover",
-				JOptionPane.YES_NO_OPTION);
-		if (op == 0) {
+		if (PopUpper.confirm("Deseja remover esta refeicao?")) {
 			controller.removeRefeicao(ref);
 			tela.removeRefeicaoFromTable(row);
 		}

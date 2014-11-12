@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.unifor.ads.DOCAL_core.entity.Dieta;
-import br.unifor.ads.DOCAL_core.entity.Usuario;
 
 public class DietaDAO {
 

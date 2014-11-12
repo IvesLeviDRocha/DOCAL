@@ -34,7 +34,7 @@ public abstract class EntityManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out
-					.println("Não foi possível inserir o pais, tente novamente!");
+					.println("Não foi possível consultar os dados, tente novamente!");
 		} finally {
 			close(pstm);
 		}
@@ -53,7 +53,7 @@ public abstract class EntityManager {
 			}
 		} catch (SQLException e) {
 			System.out
-					.println("Não foi possível inserir o pais, tente novamente!");
+					.println("Não foi possível consultar os dados, tente novamente!");
 		} finally {
 			close(pstm, result);
 		}
