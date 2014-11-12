@@ -1,8 +1,7 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
-import javax.swing.JOptionPane;
-
 import br.unifor.ads.DOCAL.controller.Controller;
+import br.unifor.ads.Pin.DOCAL.Telas.PopUpper;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaLogin;
 
 /**
@@ -28,7 +27,7 @@ public class ManagerLogin {
 			controller.showHome();
 			tela.clearFields();
 		} else {
-			JOptionPane.showMessageDialog(tela, "Usuario ou senha incorretos");
+			PopUpper.show("Usuario ou senha incorretos");
 		}
 	}
 

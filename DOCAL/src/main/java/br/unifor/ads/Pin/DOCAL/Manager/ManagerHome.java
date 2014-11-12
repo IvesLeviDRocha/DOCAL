@@ -63,7 +63,7 @@ public class ManagerHome {
 	}
 
 	public void btnSairPressionado() {
-		if(PopUpper.confirm("Deseja sair?")) {
+		if (PopUpper.confirm("Deseja sair?")) {
 			controller.showLogin();
 			controller.setLoggedUser(null);
 		}
@@ -77,7 +77,7 @@ public class ManagerHome {
 				"Peso atual: " + controller.getLoggedUser().getPeso() + "kg \n"
 						+ "Digite novo peso:"));
 		controller.updateAlturaAndPeso(altura, peso);
-		JOptionPane.showMessageDialog(tela, "Dados atualizados.");
+		PopUpper.show("Dados atualizados.");
 	}
 
 	public void updateRefeicoes() {
