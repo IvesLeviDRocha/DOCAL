@@ -102,4 +102,18 @@ public class Controller {
 		UsuarioDAO.updateAlturaAndPeso(loggedUser, altura, peso);
 	}
 
+	public boolean logUser(String login, String senha) {
+		Usuario user = UsuarioDAO.findByLogin(login);
+		if (user == null) {
+			return false;
+		} else {
+			if (user.getSenha().equals(senha)) {
+				setLoggedUser(user);
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
 }

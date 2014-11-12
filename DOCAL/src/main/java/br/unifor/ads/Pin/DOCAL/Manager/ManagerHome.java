@@ -75,7 +75,6 @@ public class ManagerHome {
 		default:
 			break;
 		}
-
 	}
 
 	public void btnAtualizarDadosPressionado() {
