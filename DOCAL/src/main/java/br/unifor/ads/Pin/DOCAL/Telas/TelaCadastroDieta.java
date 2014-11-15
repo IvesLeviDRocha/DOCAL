@@ -1,23 +1,22 @@
 package br.unifor.ads.Pin.DOCAL.Telas;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JFormattedTextField;
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerCadastroDieta;
-
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
 
 /**
  * Esta classe e responsavel por manter os componentes relativos ao cadastro da
@@ -28,6 +27,7 @@ public class TelaCadastroDieta extends JPanel {
 	private static final long serialVersionUID = 3919730245101788170L;
 
 	private ManagerCadastroDieta manager;
+	private PopUpper popUp;
 
 	private JLabel lblCadastroDeDieta;
 	private JLabel lblNome;
@@ -44,6 +44,7 @@ public class TelaCadastroDieta extends JPanel {
 
 	public TelaCadastroDieta(ManagerCadastroDieta manager) {
 		this.manager = manager;
+		popUp = new PopUpper();
 		initializeLayout();
 		initializeLabels();
 		initializeFields();
@@ -161,7 +162,7 @@ public class TelaCadastroDieta extends JPanel {
 			String gord = formattedTextFieldGord.getText();
 			manager.btnCadastrarPressionado(nome, carb, prot, gord);
 		} else {
-			JOptionPane.showMessageDialog(this, "Campos em branco!");
+			popUp.show("Campos em branco!");
 		}
 	}
 

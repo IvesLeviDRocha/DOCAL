@@ -1,6 +1,6 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
-import br.unifor.ads.DOCAL.controller.Controller;
+import br.unifor.ads.DOCAL_core.business.BusinessCadastroUsuario;
 import br.unifor.ads.DOCAL_core.entity.Usuario;
 import br.unifor.ads.Pin.DOCAL.Telas.PopUpper;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaCadastroUsuario;
@@ -11,12 +11,15 @@ import br.unifor.ads.Pin.DOCAL.Telas.TelaCadastroUsuario;
  */
 public class ManagerCadastroUsuario {
 
-	private Controller controller;
+	private FrameController controller;
 	private TelaCadastroUsuario tela;
+	private BusinessCadastroUsuario business;
+	private PopUpper popUp;
 
-	public ManagerCadastroUsuario(Controller controller) {
+	public ManagerCadastroUsuario(FrameController controller) {
 		this.controller = controller;
-		this.tela = new TelaCadastroUsuario(this);
+		tela = new TelaCadastroUsuario(this);
+		popUp = new PopUpper();
 	}
 
 	public TelaCadastroUsuario getTela() {
@@ -31,24 +34,31 @@ public class ManagerCadastroUsuario {
 	public void btnCadastrarPressionado(String nome, String login,
 			String senha, String altura, String peso) {
 		Usuario user = createUsuario(nome, login, senha, altura, peso);
-		tryRegisterUsuario(user);
+		if (user != null) {
+			tryRegisterUsuario(user);
+		}
 		tela.limparFormularios();
 	}
 
 	public Usuario createUsuario(String nome, String login, String senha,
 			String altura, String peso) {
-		Float alturaNum = Float.parseFloat(altura);
-		Float pesoNum = Float.parseFloat(peso);
-		Usuario user = new Usuario(nome, login, senha, alturaNum, pesoNum);
-		return user;
+		try {
+			Float alturaNum = Float.parseFloat(altura);
+			Float pesoNum = Float.parseFloat(peso);
+			Usuario user = new Usuario(nome, login, senha, alturaNum, pesoNum);
+			return user;
+		} catch (NumberFormatException e) {
+			popUp.show("Valores invalidos.");
+			return null;
+		}
 	}
 
 	private void tryRegisterUsuario(Usuario user) {
-		if (controller.registerUsuario(user)) {
-			PopUpper.show("Usuario cadastrado com sucesso!");
+		if (business.registerUsuario(user)) {
+			popUp.show("Usuario cadastrado com sucesso!");
 			controller.showLogin();
 		} else {
-			PopUpper.show("Esse login ja esta sendo usado. Por favor digite escolha um login diferente.");
+			popUp.show("Esse login ja esta sendo usado. Por favor digite escolha um login diferente.");
 		}
 	}
 

@@ -1,8 +1,9 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
-import br.unifor.ads.DOCAL.controller.Controller;
+import br.unifor.ads.DOCAL_core.business.BusinessCadastroDieta;
 import br.unifor.ads.DOCAL_core.entity.Dieta;
 import br.unifor.ads.DOCAL_core.entity.Usuario;
+import br.unifor.ads.Pin.DOCAL.Telas.PopUpper;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaCadastroDieta;
 
 /**
@@ -11,12 +12,16 @@ import br.unifor.ads.Pin.DOCAL.Telas.TelaCadastroDieta;
  */
 public class ManagerCadastroDieta {
 
-	private Controller controller;
+	private FrameController controller;
 	private TelaCadastroDieta tela;
+	private BusinessCadastroDieta business;
+	private PopUpper popUp;
 
-	public ManagerCadastroDieta(Controller controller) {
+	public ManagerCadastroDieta(FrameController controller) {
 		this.controller = controller;
 		this.tela = new TelaCadastroDieta(this);
+		business = new BusinessCadastroDieta();
+		popUp = new PopUpper();
 	}
 
 	public TelaCadastroDieta getTela() {
@@ -26,8 +31,10 @@ public class ManagerCadastroDieta {
 	public void btnCadastrarPressionado(String nome, String carb, String prot,
 			String gord) {
 		Dieta dieta = createDieta(nome, carb, prot, gord);
-		controller.registerDieta(dieta);
-		controller.showHome();
+		if (dieta != null) {
+			business.registerDieta(dieta);
+			controller.showHome();
+		}
 		tela.limparFormularios();
 	}
 
@@ -37,12 +44,17 @@ public class ManagerCadastroDieta {
 	}
 
 	public Dieta createDieta(String nome, String carb, String prot, String gord) {
-		Float carbNum = Float.parseFloat(carb);
-		Float protNum = Float.parseFloat(prot);
-		Float gordNum = Float.parseFloat(gord);
-		Usuario user = controller.getLoggedUser();
-		Dieta dieta = new Dieta(user, nome, carbNum, protNum, gordNum);
-		return dieta;
+		try {
+			Float carbNum = Float.parseFloat(carb);
+			Float protNum = Float.parseFloat(prot);
+			Float gordNum = Float.parseFloat(gord);
+			Usuario user = business.getLoggedUser();
+			Dieta dieta = new Dieta(user, nome, carbNum, protNum, gordNum);
+			return dieta;
+		} catch (NumberFormatException e) {
+			popUp.show("Valores invalidos.");
+			return null;
+		}
 	}
 
 }

@@ -1,6 +1,8 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
-import br.unifor.ads.DOCAL.controller.Controller;
+import java.util.List;
+
+import br.unifor.ads.DOCAL_core.business.BusinessAdicionarRefeicao;
 import br.unifor.ads.DOCAL_core.entity.Refeicao;
 import br.unifor.ads.Pin.DOCAL.Telas.PopUpper;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaAdicionarRefeicao;
@@ -11,16 +13,21 @@ import br.unifor.ads.Pin.DOCAL.Telas.TelaAdicionarRefeicao;
  */
 public class ManagerAdicionarRefeicao {
 
-	private Controller controller;
+	private FrameController controller;
 	private TelaAdicionarRefeicao tela;
+	private BusinessAdicionarRefeicao business;
+	private PopUpper popUp;
 
-	public ManagerAdicionarRefeicao(Controller controller) {
+	public ManagerAdicionarRefeicao(FrameController controller) {
 		this.controller = controller;
-		this.tela = new TelaAdicionarRefeicao(this);
+		tela = new TelaAdicionarRefeicao(this);
+		business = new BusinessAdicionarRefeicao();
+		popUp = new PopUpper();
 	}
 
 	public TelaAdicionarRefeicao getTela() {
-		tela.loadRefeicaoData(controller.getLoggedUser());
+		List<Refeicao> refeicaoData = business.getRefeicaoData();
+		tela.loadRefeicaoData(refeicaoData);
 		tela.limparForms();
 		tela.pesquisa();
 		return tela;
@@ -40,8 +47,8 @@ public class ManagerAdicionarRefeicao {
 	}
 
 	public void btnRemoverPressionado(Refeicao ref, Integer row) {
-		if (PopUpper.confirm("Deseja remover esta refeicao?")) {
-			controller.removeRefeicao(ref);
+		if (popUp.confirm("Deseja remover esta refeicao?")) {
+			business.removeRefeicao(ref);
 			tela.removeRefeicaoFromTable(row);
 		}
 	}

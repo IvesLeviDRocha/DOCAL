@@ -30,6 +30,7 @@ public class TelaCadastroUsuario extends JPanel {
 	private static final long serialVersionUID = -5136790803161914286L;
 
 	private ManagerCadastroUsuario manager;
+	private PopUpper popUp;
 
 	private JLabel lblCadastroDeUsuario;
 	private JLabel lblNome;
@@ -51,6 +52,7 @@ public class TelaCadastroUsuario extends JPanel {
 
 	public TelaCadastroUsuario(ManagerCadastroUsuario manager) {
 		this.manager = manager;
+		popUp = new PopUpper();
 		initializeLayout();
 		initializeLabels();
 		initializeFields();
@@ -207,11 +209,10 @@ public class TelaCadastroUsuario extends JPanel {
 						new String(passwordFieldSenha.getPassword()),
 						textFieldAltura.getText(), textFieldPeso.getText());
 			} else {
-				JOptionPane.showMessageDialog(this,
-						"Confirmação de senha incorreta");
+				popUp.show("Confirmação de senha incorreta");
 			}
 		} else {
-			JOptionPane.showMessageDialog(this, "Campo(s) em branco!");
+			popUp.show("Campo(s) em branco!");
 		}
 	}
 

@@ -1,6 +1,6 @@
 package br.unifor.ads.Pin.DOCAL.Manager;
 
-import br.unifor.ads.DOCAL.controller.Controller;
+import br.unifor.ads.DOCAL_core.business.BusinessLogin;
 import br.unifor.ads.Pin.DOCAL.Telas.PopUpper;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaLogin;
 
@@ -10,12 +10,15 @@ import br.unifor.ads.Pin.DOCAL.Telas.TelaLogin;
  */
 public class ManagerLogin {
 
-	private Controller controller;
+	private FrameController controller;
 	private TelaLogin tela;
+	private BusinessLogin business;
+	private PopUpper popUp;
 
-	public ManagerLogin(Controller controller) {
+	public ManagerLogin(FrameController controller) {
 		this.controller = controller;
 		this.tela = new TelaLogin(this);
+		this.business = new BusinessLogin();
 	}
 
 	public TelaLogin getTela() {
@@ -23,11 +26,11 @@ public class ManagerLogin {
 	}
 
 	public void btnEntrarPressionado(String login, String senha) {
-		if (controller.logUser(login, senha)) {
+		if (business.logUser(login, senha)) {
 			controller.showHome();
 			tela.clearFields();
 		} else {
-			PopUpper.show("Usuario ou senha incorretos");
+			popUp.show("Usuario ou senha incorretos");
 		}
 	}
 

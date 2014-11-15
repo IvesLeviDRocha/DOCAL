@@ -10,11 +10,11 @@ public class PopUpper {
 		frame = framePrincipal;
 	}
 
-	public static void show(String message) {
+	public void show(String message) {
 		JOptionPane.showMessageDialog(frame, message);
 	}
 
-	public static boolean confirm(String question) {
+	public boolean confirm(String question) {
 		int op = JOptionPane.showConfirmDialog(frame, question, "Confirmar",
 				JOptionPane.YES_NO_OPTION);
 		if (op == 0) {
@@ -22,6 +22,14 @@ public class PopUpper {
 		} else {
 			return false;
 		}
+	}
+	
+	public String receiveInput(String message) throws InputException {
+		String input = JOptionPane.showInputDialog(frame, message);
+		if (input == null) {
+			throw new InputException();
+		}
+		return input;
 	}
 
 }

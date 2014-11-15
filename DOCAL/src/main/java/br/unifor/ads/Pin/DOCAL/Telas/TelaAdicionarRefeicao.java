@@ -26,9 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import br.unifor.ads.DOCAL_core.dao.RefeicaoDAO;
 import br.unifor.ads.DOCAL_core.entity.Refeicao;
-import br.unifor.ads.DOCAL_core.entity.Usuario;
 import br.unifor.ads.Pin.DOCAL.Manager.ManagerAdicionarRefeicao;
 
 /**
@@ -230,11 +228,9 @@ public class TelaAdicionarRefeicao extends JPanel {
 		sorter.setRowFilter(RowFilter.regexFilter(text, 0));
 	}
 
-	public void loadRefeicaoData(Usuario loggedUser) {
+	public void loadRefeicaoData(List<Refeicao> refeicaoData) {
 		clearRefeicaoData();
-		List<Object> list = RefeicaoDAO.findByUserId(loggedUser.getId());
-		for (Object obj : list) {
-			Refeicao ref = (Refeicao) obj;
+		for (Refeicao ref : refeicaoData) {
 			loadedRefeicoes.add(ref);
 			dados.add(ref.getRowData());
 		}

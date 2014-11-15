@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -28,6 +27,7 @@ public class TelaCadastroRefeicao extends JPanel {
 	private static final long serialVersionUID = -214369656604544646L;
 
 	private ManagerCadastroRefeicao manager;
+	private PopUpper popUp;
 
 	private JLabel lblCadastroRefeicao;
 	private JLabel lblNome;
@@ -44,6 +44,7 @@ public class TelaCadastroRefeicao extends JPanel {
 
 	public TelaCadastroRefeicao(ManagerCadastroRefeicao manager) {
 		this.manager = manager;
+		popUp = new PopUpper();
 		initializeLayout();
 		initializeLabels();
 		initializeFields();
@@ -154,7 +155,7 @@ public class TelaCadastroRefeicao extends JPanel {
 			String gord = formattedTextFieldGord.getText();
 			manager.btnCadastrarPressionado(nome, carb, prot, gord);
 		} else {
-			JOptionPane.showMessageDialog(this, "Campos em branco!");
+			popUp.show("Campos em branco!");
 		}
 	}
 

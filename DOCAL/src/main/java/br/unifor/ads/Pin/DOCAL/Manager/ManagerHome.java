@@ -3,13 +3,11 @@ package br.unifor.ads.Pin.DOCAL.Manager;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
-import br.unifor.ads.DOCAL.controller.Controller;
-import br.unifor.ads.DOCAL_core.dao.DietaDAO;
+import br.unifor.ads.DOCAL_core.business.BusinessException;
+import br.unifor.ads.DOCAL_core.business.BusinessHome;
 import br.unifor.ads.DOCAL_core.entity.Dieta;
 import br.unifor.ads.DOCAL_core.entity.Refeicao;
-import br.unifor.ads.DOCAL_core.entity.Usuario;
+import br.unifor.ads.Pin.DOCAL.Telas.InputException;
 import br.unifor.ads.Pin.DOCAL.Telas.PopUpper;
 import br.unifor.ads.Pin.DOCAL.Telas.TelaHome;
 
@@ -19,14 +17,18 @@ import br.unifor.ads.Pin.DOCAL.Telas.TelaHome;
  */
 public class ManagerHome {
 
-	private Controller controller;
+	private FrameController controller;
 	private TelaHome tela;
+	private PopUpper popUp;
+	private BusinessHome business;
 
 	private List<Refeicao> addedRefeicoes;
 
-	public ManagerHome(Controller controller) {
+	public ManagerHome(FrameController controller) {
 		this.controller = controller;
 		this.tela = new TelaHome(this);
+		this.popUp = new PopUpper();
+		this.business = new BusinessHome();
 		addedRefeicoes = new ArrayList<Refeicao>();
 	}
 
@@ -35,25 +37,28 @@ public class ManagerHome {
 	}
 
 	public TelaHome getTela() {
-		Usuario loggedUser = controller.getLoggedUser();
-		Dieta userDiet = DietaDAO.findByUsuarioId(loggedUser.getId());
-		if (userDiet == null) {
-			PopUpper.show("Você não possui nenhuma dieta cadastrada.");
-			tela.updateUserName(loggedUser.getNome());
-		} else {
-			tela.updateUserData(loggedUser.getNome(), userDiet);
-		}
+		updateData();
 		updateRefeicoes();
 		return tela;
 	}
 
+	private void updateData() {
+		String userName = business.getNomeUsuario();
+		try {
+			Dieta userDiet = business.getUserDieta();
+			tela.updateUserData(userName, userDiet);
+		} catch (BusinessException e) {
+			popUp.show(e.getMessage());
+			tela.updateUserName(userName);
+		}
+	}
+
 	public void btnAddRefeicaoPressionado() {
 		controller.showAdicionarRefeicao();
-
 	}
 
 	public void btnResetPressionado() {
-		if (PopUpper.confirm("Deseja resetar a contagem atual?")) {
+		if (popUp.confirm("Deseja resetar a contagem atual?")) {
 			clearRefeicoes();
 		}
 	}
@@ -63,21 +68,29 @@ public class ManagerHome {
 	}
 
 	public void btnSairPressionado() {
-		if (PopUpper.confirm("Deseja sair?")) {
+		if (popUp.confirm("Deseja sair?")) {
 			controller.showLogin();
-			controller.setLoggedUser(null);
+			business.logOut();
 		}
 	}
 
 	public void btnAtualizarDadosPressionado() {
-		Float altura = Float.parseFloat(JOptionPane.showInputDialog(tela,
-				"Altura atual: " + controller.getLoggedUser().getAltura()
-						+ "m \n" + "Digite nova altura:"));
-		Float peso = Float.parseFloat(JOptionPane.showInputDialog(tela,
-				"Peso atual: " + controller.getLoggedUser().getPeso() + "kg \n"
-						+ "Digite novo peso:"));
-		controller.updateAlturaAndPeso(altura, peso);
-		PopUpper.show("Dados atualizados.");
+		Float alturaAtual = business.getAlturaUsuario();
+		Float pesoAtual = business.getPesoUsuario();
+		String messageAltura = "Altura atual: " + alturaAtual
+				+ "m \n Digite nova altura:";
+		String messagePeso = "Peso atual: " + pesoAtual
+				+ "m \n Digite novo peso:";
+		try {
+			Float altura = Float.parseFloat(popUp.receiveInput(messageAltura));
+			Float peso = Float.parseFloat(popUp.receiveInput(messagePeso));
+			business.updateAlturaAndPeso(altura, peso);
+			popUp.show("Dados atualizados.");
+		} catch (NumberFormatException e) {
+			popUp.show("Valores invalidos.");
+		} catch (InputException e) {
+			popUp.show("Os dados não foram atualizados.");
+		}
 	}
 
 	public void updateRefeicoes() {
