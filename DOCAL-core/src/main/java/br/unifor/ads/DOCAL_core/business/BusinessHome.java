@@ -42,6 +42,7 @@ public class BusinessHome {
 	public void updateAlturaAndPeso(Float altura, Float peso) {
 		Usuario loggedUser = userManager.getLoggedUser();
 		usuarioDAO.updateAlturaAndPeso(loggedUser, altura, peso);
+		userManager.updateLoggedUser();
 	}
 
 	public void logOut() {

@@ -37,9 +37,14 @@ public class LoggedUserManager {
 	public Usuario getLoggedUser() {
 		return loggedUser;
 	}
-	
+
 	public Integer getLoggedUserId() {
 		return loggedUser.getId();
+	}
+
+	public void updateLoggedUser() {
+		Usuario user = userDAO.findByLogin(loggedUser.getLogin());
+		setLoggedUser(user);
 	}
 
 }

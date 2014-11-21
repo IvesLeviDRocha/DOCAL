@@ -36,7 +36,8 @@ public class LoggedUserManagerTest {
 	public void testLogUser() {
 		String login = testUser.getLogin();
 		String password = testUser.getSenha();
-		assertTrue("Login should succeed!", userManager.logUser(login, password));
+		assertTrue("Login should succeed!",
+				userManager.logUser(login, password));
 	}
 
 	@Test
@@ -60,11 +61,23 @@ public class LoggedUserManagerTest {
 	}
 
 	@Test
+	public void testUpdateLoggedUser() {
+		Float newAltura = 1.71f;
+		Float newPeso = 54f;
+		userDao.updateAlturaAndPeso(testUser, newAltura, newPeso);
+		testUser = userDao.findById(testUser.getId());
+		assertEquals("New altura did not match!", newAltura,
+				testUser.getAltura());
+		assertEquals("New peso did not match!", newPeso, testUser.getPeso());
+	}
+
+	@Test
 	public void testGetLoggedUserId() {
 		String login = testUser.getLogin();
 		String password = testUser.getSenha();
 		userManager.logUser(login, password);
-		assertNotNull("loggedUserId should not be null!", userManager.getLoggedUserId());
+		assertNotNull("loggedUserId should not be null!",
+				userManager.getLoggedUserId());
 	}
 
 }
