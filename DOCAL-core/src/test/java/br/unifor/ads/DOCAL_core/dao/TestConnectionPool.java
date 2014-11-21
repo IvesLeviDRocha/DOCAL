@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-public class ConnectionPoolTest {
+public class TestConnectionPool {
 
 	@Test
 	public void testGetConnection() throws SQLException {
