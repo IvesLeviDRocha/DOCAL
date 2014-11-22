@@ -42,17 +42,14 @@ public class DietaDAOTest {
 
 	@Before
 	public void setUp() throws Exception {
+		System.out.println(testDiet.getUsuario_id());
 		testDiet = dietDao.findByUsuarioId(testUser.getId());
 	}
 
 	@Test
 	public void testInserir() {
-		
 		dietDao.excluir(testDiet);
 		dietDao.inserir(testDiet);
-		if (testUser.getId() == null) {
-			fail("thats it");
-		}
 		testDiet = dietDao.findByUsuarioId(testUser.getId());
 		assertNotNull(testDiet);
 	}

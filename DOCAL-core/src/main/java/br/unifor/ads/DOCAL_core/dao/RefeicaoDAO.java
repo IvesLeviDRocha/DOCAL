@@ -23,7 +23,7 @@ public class RefeicaoDAO {
 			refeicao.setCarboidratos(result.getFloat("carboidratos"));
 			refeicao.setProteinas(result.getFloat("proteinas"));
 			refeicao.setGorduras(result.getFloat("gorduras"));
-			refeicao.setUsuario_id(userDAO.findById(result.getInt("id")));
+			refeicao.setUsuario_id(userDAO.findById(result.getInt("usuario_id")));
 			return refeicao;
 		}
 	};
