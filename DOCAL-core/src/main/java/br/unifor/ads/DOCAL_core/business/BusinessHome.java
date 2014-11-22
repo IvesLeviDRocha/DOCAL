@@ -14,6 +14,7 @@ public class BusinessHome {
 	public BusinessHome() {
 		userManager = new LoggedUserManager();
 		dietaDAO = new DietaDAO();
+		usuarioDAO = new UsuarioDAO();
 	}
 
 	public Dieta getUserDieta() throws BusinessException {

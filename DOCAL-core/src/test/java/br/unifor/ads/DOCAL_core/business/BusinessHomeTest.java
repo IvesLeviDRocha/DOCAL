@@ -68,9 +68,12 @@ public class BusinessHomeTest {
 
 	@Test
 	public void testUpdateAlturaAndPeso() {
-		// TODO: descobrir de onde saiu esse nullpointer...
 		Float newAltura = 1.71f;
 		Float newPeso = 54f;
+		Usuario tempUser = userManager.getLoggedUser();
+		if (tempUser.getId() == null) {
+			fail("thats it");
+		}
 		business.updateAlturaAndPeso(newAltura, newPeso);
 		testUser = userManager.getLoggedUser();
 		assertEquals("New altura did not match!", newAltura,
