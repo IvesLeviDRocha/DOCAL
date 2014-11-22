@@ -42,7 +42,6 @@ public class DietaDAOTest {
 
 	@Before
 	public void setUp() throws Exception {
-		System.out.println(testDiet.getUsuario_id());
 		testDiet = dietDao.findByUsuarioId(testUser.getId());
 	}
 
