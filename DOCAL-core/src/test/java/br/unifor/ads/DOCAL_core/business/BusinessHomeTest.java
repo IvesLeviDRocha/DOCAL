@@ -6,7 +6,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.unifor.ads.DOCAL_core.dao.DietaDAO;
 import br.unifor.ads.DOCAL_core.dao.UsuarioDAO;
+import br.unifor.ads.DOCAL_core.entity.Dieta;
 import br.unifor.ads.DOCAL_core.entity.Usuario;
 
 public class BusinessHomeTest {
@@ -15,6 +17,8 @@ public class BusinessHomeTest {
 	private static LoggedUserManager userManager;
 	private static Usuario testUser;
 	private static UsuarioDAO userDao;
+	private static Dieta testDiet;
+	private static DietaDAO dietDao;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -25,6 +29,8 @@ public class BusinessHomeTest {
 		userDao.inserir(testUser);
 		testUser = userDao.findByLogin("joao123");
 		userManager.logUser(testUser.getLogin(), testUser.getSenha());
+		testDiet = new Dieta(testUser, "testDiet", 100f, 50f, 10f);
+		dietDao = new DietaDAO();
 	}
 
 	@AfterClass
@@ -37,7 +43,18 @@ public class BusinessHomeTest {
 	}
 
 	@Test
-	public void testGetUserDieta() {
+	public void testGetUserDieta() throws BusinessException {
+		dietDao.inserir(testDiet);
+		testDiet = dietDao.buscarPorNome(testDiet.getNome());
+		String expectedNome = testDiet.getNome();
+		Dieta userDiet = business.getUserDieta();
+		String actualNome = userDiet.getNome();
+		assertEquals(expectedNome, actualNome);
+		dietDao.excluir(testDiet);
+	}
+
+	@Test
+	public void testGetUserDietaWhenUserHasNoDieta() {
 		try {
 			business.getUserDieta();
 			fail("User should not have a dieta!");
@@ -70,10 +87,6 @@ public class BusinessHomeTest {
 	public void testUpdateAlturaAndPeso() {
 		Float newAltura = 1.71f;
 		Float newPeso = 54f;
-		Usuario tempUser = userManager.getLoggedUser();
-		if (tempUser.getId() == null) {
-			fail("thats it");
-		}
 		business.updateAlturaAndPeso(newAltura, newPeso);
 		testUser = userManager.getLoggedUser();
 		assertEquals("New altura did not match!", newAltura,
