@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class EntityManager {
+public abstract class EntityManager<T> {
 
 	public void execute(String sql, Object... params) {
 		PreparedStatement pstm = null;
@@ -41,8 +41,8 @@ public abstract class EntityManager {
 		return retorno;
 	}
 
-	public List<Object> resultList(String sql, Object... params) {
-		List<Object> lista = new ArrayList<Object>();
+	public List<T> resultList(String sql, Object... params) {
+		List<T> lista = new ArrayList<T>();
 		PreparedStatement pstm = null;
 		ResultSet result = null;
 		try {
@@ -106,6 +106,6 @@ public abstract class EntityManager {
 
 	}
 
-	public abstract Object trataResultSet(ResultSet result) throws SQLException;
+	public abstract T trataResultSet(ResultSet result) throws SQLException;
 
 }

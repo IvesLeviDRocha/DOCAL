@@ -22,6 +22,7 @@ public class ManagerLogin {
 	}
 
 	public TelaLogin getTela() {
+		business.logOut();
 		return tela;
 	}
 

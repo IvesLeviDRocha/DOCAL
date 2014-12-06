@@ -1,6 +1,8 @@
 package br.unifor.ads.DOCAL_core.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -60,13 +62,13 @@ public class RefeicaoDAOTest {
 
 	@Test
 	public void testFindByUserId() {
-		List<Object> list = refDao.findByUserId(testUser.getId());
+		List<Refeicao> list = refDao.findByUserId(testUser.getId());
 		assertTrue(list.size()>0);
 	}
 
 	@Test
 	public void testBuscarTodos() {
-		List<Object> list = refDao.buscarTodos();
+		List<Refeicao> list = refDao.buscarTodos();
 		assertTrue(list.size()>0);
 	}
 

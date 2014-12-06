@@ -15,5 +15,9 @@ public class BusinessLogin {
 			return false;
 		}
 	}
+	
+	public void logOut() {
+		userManager.logOut();
+	}
 
 }

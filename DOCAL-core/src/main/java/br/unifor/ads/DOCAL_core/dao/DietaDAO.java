@@ -14,9 +14,9 @@ public class DietaDAO {
 		userDAO = new UsuarioDAO();
 	}
 
-	private EntityManager em = new EntityManager() {
+	private EntityManager<Dieta> em = new EntityManager<Dieta>() {
 		@Override
-		public Object trataResultSet(ResultSet result) throws SQLException {
+		public Dieta trataResultSet(ResultSet result) throws SQLException {
 			Dieta dieta = new Dieta();
 			dieta.setId(result.getInt("id"));
 			dieta.setNome(result.getString("nome"));
@@ -45,7 +45,7 @@ public class DietaDAO {
 		return (Dieta) em.getSingleResult(sql, usuarioId);
 	}
 
-	public List<Object> buscarTodos() {
+	public List<Dieta> buscarTodos() {
 		String sql = "select id, nome, usuario_id, carboidratos, proteinas, gorduras from dieta";
 		return em.resultList(sql);
 	}

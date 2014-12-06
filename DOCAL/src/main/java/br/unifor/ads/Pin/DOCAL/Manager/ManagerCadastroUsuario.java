@@ -55,19 +55,12 @@ public class ManagerCadastroUsuario {
 	}
 
 	private void tryRegisterUsuario(Usuario user) {
-		System.out.println("step1");
 		if (business.registerUsuario(user)) {
-			System.out.println("step2");
 			popUp.show("Usuario cadastrado com sucesso!");
-			System.out.println("step3");
 			controller.showLogin();
-			System.out.println("step4");
 		} else {
-			System.out.println("step5");
 			popUp.show("Esse login ja esta sendo usado. Por favor digite escolha um login diferente.");
-			System.out.println("step6");
 		}
-		System.out.println("step7");
 	}
 
 	public void btnLimparPressionado() {

@@ -15,7 +15,7 @@ import org.junit.Test;
 import br.unifor.ads.DOCAL_core.entity.Usuario;
 
 public class UsuarioDAOTest {
-	
+
 	private static Usuario testUser;
 	private static UsuarioDAO userDao;
 
@@ -32,12 +32,12 @@ public class UsuarioDAOTest {
 		testUser = null;
 		userDao = null;
 	}
-	
+
 	@Before
 	public void setUp() throws Exception {
 		testUser = userDao.findByLogin(testUser.getLogin());
 	}
-	
+
 	@Test
 	public void testInserir() {
 		userDao.excluir(testUser);
@@ -63,13 +63,15 @@ public class UsuarioDAOTest {
 
 	@Test
 	public void testBuscarTodos() {
-		Usuario testUser2 = new Usuario("testUserJose", "jose123", "jose321", 1.70f, 53f);
+		Usuario testUser2 = new Usuario("testUserJose", "jose123", "jose321",
+				1.70f, 53f);
 		userDao.inserir(testUser2);
 		testUser2 = userDao.findByLogin(testUser2.getLogin());
-		List<Object> list = userDao.buscarTodos();
+		List<Usuario> list = userDao.buscarTodos();
 		int expectedMinimumSize = 2;
 		int actualSize = list.size();
-		assertTrue("Not enough registered users!", actualSize >= expectedMinimumSize);
+		assertTrue("Not enough registered users!",
+				actualSize >= expectedMinimumSize);
 		userDao.excluir(testUser2);
 	}
 
@@ -87,7 +89,8 @@ public class UsuarioDAOTest {
 		Float newPeso = 54f;
 		userDao.updateAlturaAndPeso(testUser, newAltura, newPeso);
 		testUser = userDao.findByLogin(testUser.getLogin());
-		assertEquals("New altura did not match!", newAltura, testUser.getAltura());
+		assertEquals("New altura did not match!", newAltura,
+				testUser.getAltura());
 		assertEquals("New peso did not match!", newPeso, testUser.getPeso());
 	}
 

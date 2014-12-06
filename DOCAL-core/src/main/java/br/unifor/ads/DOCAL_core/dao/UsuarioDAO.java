@@ -4,14 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.unifor.ads.DOCAL_core.dao.EntityManager;
 import br.unifor.ads.DOCAL_core.entity.Usuario;
 
 public class UsuarioDAO {
 
-	private EntityManager em = new EntityManager() {
+	private EntityManager<Usuario> em = new EntityManager<Usuario>() {
 		@Override
-		public Object trataResultSet(ResultSet result) throws SQLException {
+		public Usuario trataResultSet(ResultSet result) throws SQLException {
 			Usuario usuario = new Usuario();
 			usuario.setId(result.getInt("id"));
 			usuario.setNome(result.getString("nome"));
@@ -44,7 +43,7 @@ public class UsuarioDAO {
 		return (Usuario) em.getSingleResult(sql, login);
 	}
 
-	public List<Object> buscarTodos() {
+	public List<Usuario> buscarTodos() {
 		String sql = "select id, nome, altura, peso, login, senha from usuario";
 		return em.resultList(sql);
 	}

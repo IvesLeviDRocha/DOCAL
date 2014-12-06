@@ -14,9 +14,9 @@ public class RefeicaoDAO {
 		userDAO = new UsuarioDAO();
 	}
 
-	private EntityManager em = new EntityManager() {
+	private EntityManager<Refeicao> em = new EntityManager<Refeicao>() {
 		@Override
-		public Object trataResultSet(ResultSet result) throws SQLException {
+		public Refeicao trataResultSet(ResultSet result) throws SQLException {
 			Refeicao refeicao = new Refeicao();
 			refeicao.setId(result.getInt("id"));
 			refeicao.setNome(result.getString("nome"));
@@ -40,12 +40,12 @@ public class RefeicaoDAO {
 		return (Refeicao) em.getSingleResult(sql, nome);
 	}
 
-	public List<Object> findByUserId(Integer usuario_id) {
+	public List<Refeicao> findByUserId(Integer usuario_id) {
 		String sql = "select id, nome, usuario_id, carboidratos, proteinas, gorduras from refeicao where usuario_id = ?";
 		return em.resultList(sql, usuario_id);
 	}
 
-	public List<Object> buscarTodos() {
+	public List<Refeicao> buscarTodos() {
 		String sql = "select id, nome, usuario_id, carboidratos, proteinas, gorduras from refeicao";
 		return em.resultList(sql);
 	}
